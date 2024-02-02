@@ -1,66 +1,78 @@
-html, body, #wrap {
+html,
+body,
+#wrap {
     height: 100%;
-    }
-        
+}
+
 body {
     padding: 0px;
     margin: 0px;
-    
-    font-size: 100%; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
-    color: #000;
-    
+
+    font-size: 100%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #768693;
+
     background-color: #ebf0f4;
-    }
+}
+
+header {
+    margin-bottom: 1rem;
+}
+
+h1 {
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
 
 #wrap {
     display: table;
     padding: 20px 0;
     margin: auto;
     width: 640px;
-    }
+}
 
 main {
     display: table-cell;
     vertical-align: middle;
-                
+
     margin: 0;
     padding: 0;
-    }
-        
+}
+
 a {
     text-decoration: none;
     color: #444;
     line-height: 30px;
-    }
+}
 
 form {
     text-align: left;
-    }
+}
 
 input {
     margin-top: 5px;
     height: 20px;
-    
-    font-size: 100%; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
-    
+
+    font-size: 100%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+
     cursor: pointer;
     cursor: hand;
-    }
+}
 
 .inputText {
     border: 1px solid #c0cad0;
     border-radius: 3px;
-    }
-        
-#newSumm, #newDate {
+}
+
+#newSumm,
+#newDate {
     width: 160px;
-    }
+}
 
 #newSumm {
     margin-bottom: 10px;
-    }
+}
 
 .cellLabel {
     padding: 0;
@@ -70,91 +82,90 @@ input {
     line-height: 16px;
     color: #a9b2b9;
     letter-spacing: 0.7px;
-    }
-        
-#list > li > .cells > .cellLabel:first-of-type,
+}
+
+#list>li>.cells>.cellLabel:first-of-type,
 #add .cellLabel:first-of-type {
     padding-top: 3px;
-    }
+}
 
 #percent {
     width: 50px;
-    }
+}
 
 .settLabel {
     display: inline;
     margin-right: 10px;
-    }
+}
 
 #notify {
     display: none;
-    
+
     font-size: 70%;
     font-style: italic;
-    }
+}
 
 #list {
     margin: 0;
     padding: 0;
     list-style: none;
     width: 100%;
-    }
+}
 
-#list > li {
+#list>li {
     margin-bottom: 3px;
     background: white;
     border-radius: 5px;
-    }
-        
+}
+
 #control {
     padding: 20px;
     margin-bottom: 3px;
     background: rgba(255, 255, 255, 0.7);
-    
+
     border-radius: 5px;
-    }
+}
 
 #add {
     padding-right: 28px;
     border-right: 2px solid #ebf0f4;
-    }
-    
+}
+
 #description {
     width: 280px;
-    color: #768693;
-    }
+}
 
 .note {
     margin: 0;
     padding: 0;
-    }
+}
 
 .cells {
     display: inline-block;
     padding: 10px;
     margin-right: 3px;
-    
+
     vertical-align: top;
-    }
+}
 
-#list > li > .cells {
+#list>li>.cells {
     margin-right: 1px;
-    }
+}
 
-#list > li > .cells:last-of-type {
+#list>li>.cells:last-of-type {
     border: 0;
     margin-right: 0;
-    }
+}
 
-#list > li > .cells:first-of-type {
+#list>li>.cells:first-of-type {
     width: 151px;
-    }
+}
 
 .del {
     width: 40px;
     display: inline-block;
     margin: 3px;
-    
+
     line-height: 113px;
     text-align: center;
     vertical-align: middle;
@@ -162,21 +173,21 @@ input {
     font-size: 120%;
     color: #bc7070;
     border-radius: 2px;
-    }
+}
 
 .del:hover {
     color: #6c3939;
     background-color: #f8ecec;
-    }
+}
 
 #newSubmit {
     margin: 20px 0 10px;
     height: 40px;
-    
+
     width: 248px;
-    
+
     color: #1c392a;
-    
+
     font-weight: normal;
     background-color: #aaf0cd;
     border: 0;
@@ -192,11 +203,12 @@ input {
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
-    
-    overflow: hidden;
-    }
 
-#summLabel, #summValue {
+    overflow: hidden;
+}
+
+#summLabel,
+#summValue {
     display: none;
 }
 
