@@ -121,11 +121,6 @@ class Calculator {
         var i;
         var summ = 0;
 
-        function rusNum(number, titles) {
-            var cases = [2, 0, 1, 1, 1, 2];
-            return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-        }
-
         list.innerHTML = '';
 
         // Печатаем массив
@@ -137,10 +132,10 @@ class Calculator {
             h += '<li>';
             h += '<a class="del" href="#" onClick="calc.remove(' + i + ')">×</a>';
             h += '<div class="cells">';
-            h += '<p class="cellLabel">Вклад</p><p class="value">';
+            h += '<p class="cellLabel">Deposit amaunt</p><p class="value">';
             h += this.arr[i].summ;
             h += '</p>';
-            h += '<p class="cellLabel">Дата вклада</p><p class="value">';
+            h += '<p class="cellLabel">Deposit date</p><p class="value">';
             h += this.arr[i].date.getDate();
             h += ' ';
             h += this.monthNames[this.arr[i].date.getMonth()];
@@ -149,12 +144,11 @@ class Calculator {
             h += '</p></div>';
 
             h += '<div class="cells">';
-            h += '<p class="cellLabel">Сумма накоплений сегодня</p>';
-            h += '<p class="cellLabel">Сумма накоплений через ';
+            h += '<p class="cellLabel">The maturity amount today</p>';
+            h += '<p class="cellLabel">The maturity amount in ';
             h += this.calc(this.arr[i].summ, this.arr[i].date).d;
-            h += ' ';
-            h += rusNum(this.calc(this.arr[i].summ, this.arr[i].date).d, ['день', 'дня', 'дней']);
-            h += '<p class="cellLabel">Количество выплат</p>';
+            h += ' days';
+            h += '<p class="cellLabel">Amount of payouts</p>';
             h += '</div>';
 
             h += '<div class="cells">';
