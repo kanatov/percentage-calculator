@@ -4,131 +4,49 @@
 <head>
 	<title>Fixed deposit calculator</title>
 	<meta charset="utf-8">
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/bootstrap-datepicker.min.js"></script>
 	<script src="./js/calculator.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/bootstrap-datepicker3.standalone.css">
 	<link rel="stylesheet" href="./css/style.css">
+	<style>
+
+	</style>
 </head>
 
 <body>
-	<header id="topbar">
-		<div id="logoWrap">
-			<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
-		</div>
-		<ul id="headerNav">
-			<li class="selected"><span>Calculator</span></li>
-			<li><a href="#">Plans</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">About</a></li>
-		</ul>
-	</header>
-	<main>
-		<header>
-			<h1>Deposit calculator</h1>
-			<p id="tagline">
-				Calculate your deposit's maturity amount with monthly cumulative payouts
-			</p>
-		</header>
-		<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
-		<form id="form" onsubmit="return false">
-			<fieldset id="formInput">
-				<div id="formPlanGroup" class="col-double row-full">
-					<label class="label">Plan</label>
-					<div id="planGroup" class="radio-group row-long">
-						<label id="planBasic" for="basic" class="button">
-							Basic
-							<input type="radio" id="basic" name="plan" value="basic" checked />
-						</label>
-
-						<label id="planPro" for="pro" class="button">
-							Pro
-							<input type="radio" id="pro" name="plan" value="pro" />
-						</label>
-
-						<label id="planPremium" for="premium" class="button">
-							Premium
-							<input type="radio" id="premium" name="plan" value="premium" />
-						</label>
-					</div>
-
+	<div id="wrap">
+		<main>
+			<div id="control">
+				<div id="add" class="cells">
+					<form onsubmit="return false">
+						<p class="cellLabel">Deposit amaunt</p>
+						<input id="newSumm" class="inputText" type="number" name="summ" value="1500"
+							onblur="calc.notify()">
+						<p class="cellLabel">Deposit opening date</p>
+						<div id="datepicker"></div>
+						<input id="newSubmit" type="submit" value="Add" onClick="calc.add(); this.blur();">
+					</form>
 				</div>
-
-
-				<div id="formDepositRangeRow" class="col-double row-full">
-					<label class="label">Initial deposit</label>
-					<input id="formDeposit" class="input" type="number" name="summ" value="35000" onblur="calc.notify()">
-					<input id="formDepositRange" type="range" name="volume" min="25000" max="250000" value="25000" step="1000" />
-					<label id="formDepositMin">25,000</label><label id="formDepositMax">250,000</label>
+				<div id="description" class="cells">
+					<p class="note">
+						A fixed deposit calculator helps you calculate the maturity amount for your deposit based on the
+						prevailing interest rate from the deposit opening date till the present day.
+					</p>
+					<form onsubmit="return false">
+						<p class="cellLabel">Monthly interest</p>
+						<input id="percent" class="inputText" type="number" min="1" name="summ" value="2"
+							onchange="calc.render()">
+						<p class="settLabel">%</p>
+						<p id="summLabel" class="cellLabel">Maturity Amount</p>
+						<p id="summValue" class="value"></p>
+					</form>
 				</div>
-
-				<label class="label">Period</label>
-				<div id="periodGroup" class="radio-group row-long">
-					<label for="preiod3" class="button">
-						3mo
-						<input type="radio" id="preiod3" name="period" value="preiod3" checked />
-					</label>
-
-					<label for="preiod4" class="button">
-						4mo
-						<input type="radio" id="preiod4" name="period" value="preiod4" />
-					</label>
-
-					<label for="preiod12" class="button">
-						12mo
-						<input type="radio" id="preiod12" name="period" value="preiod12" />
-					</label>
-				</div>
-
-				<label class="label row-medium">Interest rate</label>
-				<span id="formPercent" class="input row-medium">2%</span>
-			</fieldset>
-			<fieldset id="formResult">
-				<label class="label">From</label>
-				<span class="input row-long">
-					<span id="resultFromDate" class="value">20 March 2024</span>
-				</span>
-				<label class="label">To</label>
-				<span class="input row-long">
-					<aspan id="resultToDate" class="value">30 March 2024</aspan>
-				</span>
-				<label class="label row-medium">Total savings</label>
-				<span class="input row-medium">37,100</span>
-				<label class="label row-medium">Earned interest</label>
-				<span id="earnedInterest" class="input row-medium">21,000</span>
-				<div id="saveResultWrap">
-					<input id="saveResult" class="button" type="submit" value="Save result" onClick="calc.add(); this.blur();">
-				</div>
-			</fieldset>
-		</form>
-		<ul id="savedResults">
-			<li>
-
-			</li>
-		</ul>
-	</main>
-	<footer>
-		<div id="footerWrap">
-			<ul id="footerNav">
-				<li><a href="#">Privacy Policy</a></li>
-				<li><a href="#">Terms of Service</a></li>
-				<li><a href="#">Cookie Policy</a></li>
-				<li><a href="#">Contact us</a></li>
+			</div>
+			<ul id="list">
 			</ul>
-			<section id="footerLinks">
-				<div id="logoWrapFooter">
-					<a href="#"><img id="logoCI" src="./img/CI_Financial_Logo.svg" alt="CI Financial Logo" /></a>
-				</div>
-				<p>The stated plans and deposits are simulated and aim to showcase the prowess of ChatGPT in generating text.</p>
-
-			</section>
-			<hr>
-			<p id="footerNote">
-			<p>&copy; 2024 Cumulus Pty Ltd. Trademarks and brands are the property of their respective owners.</p>
-			</p>
-		</div>
-	</footer>
-
+		</main>
+	</div>
 	<script>
 		"use strict";
 
@@ -136,6 +54,7 @@
 		window.onload = (_e) => {
 			const domElements = {
 				summ: document.getElementById('newSumm'),
+				date: $('#datepicker'),
 				list: document.getElementById("list"),
 				percent: document.getElementById('percent'),
 				summLabel: document.getElementById('summLabel'),
