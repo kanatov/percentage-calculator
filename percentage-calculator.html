@@ -15,41 +15,48 @@
 </head>
 
 <body>
-	<div id="wrap">
-		<main>
-			<header>
-				<h1>Deposit calculator</h1>
-				<p id="tagline">
-					A fixed deposit calculator helps you calculate the maturity amount for your deposit based on the
-					prevailing interest rate from the deposit opening date till the present day.
-				</p>
-			</header>
-			<div id="control">
-				<div id="add" class="cells">
-					<form onsubmit="return false">
-						<p class="cellLabel">Deposit amaunt</p>
-						<input id="newSumm" class="inputText" type="number" name="summ" value="1500"
-							onblur="calc.notify()">
-						<p class="cellLabel">Deposit opening date</p>
-						<div id="datepicker"></div>
-						<input id="newSubmit" type="submit" value="Add" onClick="calc.add(); this.blur();">
-					</form>
-				</div>
-				<div id="description" class="cells">
-					<form onsubmit="return false">
-						<p class="cellLabel">Monthly interest</p>
-						<input id="percent" class="inputText" type="number" min="1" name="summ" value="2"
-							onchange="calc.render()">
-						<p class="settLabel">%</p>
-						<p id="summLabel" class="cellLabel">Maturity Amount</p>
-						<p id="summValue" class="value"></p>
-					</form>
-				</div>
-			</div>
-			<ul id="list">
-			</ul>
-		</main>
-	</div>
+	<main>
+		<header>
+			<h1>Deposit calculator</h1>
+			<p id="tagline">
+				Calculate your deposit's maturity amount with monthly cumulative payouts
+			</p>
+		</header>
+		<ul id="list">
+			<li>
+				<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
+				<form onsubmit="return false">
+					<fieldset id="formInput">
+						<label>Deposit amaunt</label>
+						<input id="formDeposit" type="number" name="summ" value="1500" onblur="calc.notify()">
+
+						<label>Ammount of months</label>
+						<input id="formDays" type="number" name="summ" value="30" onblur="calc.notify()">
+
+						<label>Monthly interest (%)</label>
+						<input id="formPercent" type="number" min="1" name="summ" value="2" onchange="calc.render()">
+					</fieldset>
+					<fieldset id="formResult">
+						<label class="calendar-row">From</label>
+						<span class="calendar-row">
+							<span id="resultFromDate" class="value">20 March 2024</span>
+						</span>
+						<label class="calendar-row">To</label>
+						<span class="calendar-row">
+							<aspan id="resultToDate" class="value">30 March 2024</aspan>
+						</span>
+						<label>Maturity Amount</label>
+						<span class="value">1000</span>
+						<label>Amount of payouts</label>
+						<span class="value">1</span>
+						<div id="saveResultWrap">
+							<input id="saveResult" class="button" type="submit" value="Save result" onClick="calc.add(); this.blur();">
+						</div>
+					</fieldset>
+				</form>
+			</li>
+		</ul>
+	</main>
 	<script>
 		"use strict";
 
