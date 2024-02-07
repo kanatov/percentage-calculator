@@ -1,3 +1,5 @@
+/* reset */
+
 html,
 body {
     height: 100%;
@@ -27,19 +29,143 @@ button {
 
 html {
     font-size: 14pt;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: #332d2a;
-    background-color: #EDEDE9;
+    font-family: 'Barlow', Verdana, sans-serif;
+    color: #2a2f33;
+    background-color: #ebf0f4;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header,
 main {
     margin: 0 auto;
     width: 40rem;
+}
+
+/* topbar */
+
+#topbar {
+    height: 2.5rem;
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#logoWrap {
+    width: 0;
+    display: flex;
+}
+
+#logo {
+    width: 6.5rem;
+    filter: brightness(0) invert(20%) hue-rotate(210deg);
+}
+
+#logoWrap a:hover #logo {
+    filter: brightness(0) invert(50%) hue-rotate(210deg);
+}
+
+#headerNav {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    height: 5rem;
+}
+
+#headerNav li a,
+#headerNav li span {
+    padding: .6rem 1rem;
+    line-height: 4rem;
+    border-radius: 2rem;
+}
+
+#headerNav li a:hover {
+    background-color: #d7e0e6;
+}
+
+
+#topbar .selected span {
+    background-color: #cbd4d9;
+}
+
+/* footer */
+
+footer {
+    background-color: #cbd4d9;
+    padding: 2rem 2rem 3rem;
+    color: #667079;
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #2a2f33;
+}
+
+footer a:hover {
+    color: #667079;
+
+}
+
+hr {
+    border: 1px solid #b8c0c8;
+}
+
+#footerLinks p {
+    flex: 1 1 auto;
+}
+
+#footerLinks {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#footerNav {
+    margin-bottom: 1rem;
+}
+
+footer hr {
+    margin: 1rem 0;
+}
+
+#logoWrapFooter {
+    width: 0;
+    text-align: right;
+    direction: rtl;
+}
+
+#logoCI {
+    width: 6.5rem;
+    filter: brightness(0) invert(47%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+/* main */
+
+main {
+    flex-grow: 1;
     padding: 2rem 0;
 }
 
 
-header {
+main header {
     text-align: center;
     margin-bottom: 2rem;
 }
@@ -52,11 +178,12 @@ h1 {
     margin: auto;
     display: block;
     width: 30rem;
+    font-family: "DomaineText", Georgia, serif;
 }
 
 a {
     text-decoration: none;
-    color: #333533;
+    color: #333435;
 }
 
 .button {
@@ -106,6 +233,7 @@ input[type=number] {
 #formResult label {
     grid-column-start: 1;
     grid-column-end: 3;
+    /* color: #807169; */
 }
 
 #formResult label.calendar-row {
@@ -139,6 +267,8 @@ input[type=number] {
     padding: .5rem;
     height: 1.5rem;
     max-width: 100%;
+    border: 1px solid #2a2f33;
+    border-radius: 3px;
 }
 
 /*
@@ -148,21 +278,14 @@ input[type=number] {
 } 
 
 */
-#list form input {
-    border: 1px solid #332d2a;
-    border-radius: 3px;
-}
-
-
-
 
 #formResult {
     padding: 1rem;
-    background-color: #F5EBE0;
+    background-color: #e0ebf5;
 }
 
 #formResult a:hover {
-    background-color: #E3D5CA;
+    background-color: #cad7e3;
 }
 
 .del {
@@ -195,17 +318,17 @@ input[type=number] {
     width: 12rem;
     height: 100%;
 
-    color: #332d2a;
+    color: #2a2f33;
 
     font-weight: normal;
-    background-color: #F5CB5C;
+    background-color: #ffcc66;
     border: 0;
-    border-radius: .3rem;
+    border-radius: 2rem;
 
 }
 
 #saveResult:hover {
-    background-color: #e6be56;
+    background-color: #ffbb33;
 }
 
 #summLabel,
