@@ -37,11 +37,12 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: stretch;
 }
 
 header,
-main {
+main,
+#footerWrap {
     margin: 0 auto;
     width: 40rem;
 }
@@ -50,7 +51,7 @@ main {
 
 #topbar {
     height: 2.5rem;
-    padding-top: 1rem;
+    padding-top: .75rem;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -63,11 +64,11 @@ main {
 
 #logo {
     width: 6.5rem;
-    filter: brightness(0) invert(20%) hue-rotate(210deg);
+    filter: brightness(0) invert(15%) sepia(100%) hue-rotate(140deg) saturate(20%);
 }
 
 #logoWrap a:hover #logo {
-    filter: brightness(0) invert(50%) hue-rotate(210deg);
+    filter: brightness(0) invert(35%) sepia(100%) hue-rotate(140deg) saturate(20%);
 }
 
 #headerNav {
@@ -128,16 +129,6 @@ hr {
     border: 1px solid #b8c0c8;
 }
 
-#footerLinks p {
-    flex: 1 1 auto;
-}
-
-#footerLinks {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-}
-
 #footerNav {
     margin-bottom: 1rem;
 }
@@ -147,9 +138,7 @@ footer hr {
 }
 
 #logoWrapFooter {
-    width: 0;
-    text-align: right;
-    direction: rtl;
+    float: right;
 }
 
 #logoCI {
@@ -281,7 +270,7 @@ input[type=number] {
 
 #formResult {
     padding: 1rem;
-    background-color: #e0ebf5;
+    background-color: #f5eee0;
 }
 
 #formResult a:hover {
