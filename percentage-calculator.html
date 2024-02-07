@@ -4,8 +4,6 @@
 <head>
 	<title>Fixed deposit calculator</title>
 	<meta charset="utf-8">
-	<script src="./js/jquery-2.1.4.min.js"></script>
-	<script src="./js/bootstrap-datepicker.min.js"></script>
 	<script src="./js/calculator.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,61 +12,61 @@
 </head>
 
 <body>
-	<div id="root">
-		<header id="topbar">
-			<div id="logoWrap">
-				<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
-			</div>
-			<ul id="headerNav">
-				<li class="selected"><span>Calculator</span></li>
-				<li><a href="#">Plans</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">About</a></li>
-			</ul>
+	<header id="topbar">
+		<div id="logoWrap">
+			<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
+		</div>
+		<ul id="headerNav">
+			<li class="selected"><span>Calculator</span></li>
+			<li><a href="#">Plans</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">About</a></li>
+		</ul>
+	</header>
+	<main>
+		<header>
+			<h1>Deposit calculator</h1>
+			<p id="tagline">
+				Calculate your deposit's maturity amount with monthly cumulative payouts
+			</p>
 		</header>
-		<main>
-			<header>
-				<h1>Deposit calculator</h1>
-				<p id="tagline">
-					Calculate your deposit's maturity amount with monthly cumulative payouts
-				</p>
-			</header>
-			<ul id="list">
-				<li>
-					<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
-					<form onsubmit="return false">
-						<fieldset id="formInput">
-							<label>Deposit amaunt</label>
-							<input id="formDeposit" type="number" name="summ" value="1500" onblur="calc.notify()">
+		<ul id="list">
+			<li>
+				<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
+				<form onsubmit="return false">
+					<fieldset id="formInput">
+						<label>Deposit amaunt</label>
+						<input id="formDeposit" type="number" name="summ" value="1500" onblur="calc.notify()">
 
-							<label>Ammount of months</label>
-							<input id="formDays" type="number" name="summ" value="30" onblur="calc.notify()">
+						<label>Ammount of months</label>
+						<input id="formDays" type="number" name="summ" value="30" onblur="calc.notify()">
 
-							<label>Monthly interest (%)</label>
-							<input id="formPercent" type="number" min="1" name="summ" value="2" onchange="calc.render()">
-						</fieldset>
-						<fieldset id="formResult">
-							<label class="calendar-row">From</label>
-							<span class="calendar-row">
-								<span id="resultFromDate" class="value">20 March 2024</span>
-							</span>
-							<label class="calendar-row">To</label>
-							<span class="calendar-row">
-								<aspan id="resultToDate" class="value">30 March 2024</aspan>
-							</span>
-							<label>Maturity Amount</label>
-							<span class="value">1000</span>
-							<label>Amount of payouts</label>
-							<span class="value">1</span>
-							<div id="saveResultWrap">
-								<input id="saveResult" class="button" type="submit" value="Save result" onClick="calc.add(); this.blur();">
-							</div>
-						</fieldset>
-					</form>
-				</li>
-			</ul>
-		</main>
-		<footer>
+						<label>Monthly interest (%)</label>
+						<input id="formPercent" type="number" min="1" name="summ" value="2" onchange="calc.render()">
+					</fieldset>
+					<fieldset id="formResult">
+						<label class="calendar-row">From</label>
+						<span class="calendar-row">
+							<span id="resultFromDate" class="value">20 March 2024</span>
+						</span>
+						<label class="calendar-row">To</label>
+						<span class="calendar-row">
+							<aspan id="resultToDate" class="value">30 March 2024</aspan>
+						</span>
+						<label>Maturity Amount</label>
+						<span class="value">1000</span>
+						<label>Amount of payouts</label>
+						<span class="value">1</span>
+						<div id="saveResultWrap">
+							<input id="saveResult" class="button" type="submit" value="Save result" onClick="calc.add(); this.blur();">
+						</div>
+					</fieldset>
+				</form>
+			</li>
+		</ul>
+	</main>
+	<footer>
+		<div id="footerWrap">
 			<ul id="footerNav">
 				<li><a href="#">Privacy Policy</a></li>
 				<li><a href="#">Terms of Service</a></li>
@@ -76,17 +74,18 @@
 				<li><a href="#">Contact us</a></li>
 			</ul>
 			<section id="footerLinks">
-				<p>The stated plans and deposits are simulated and aim to showcase the prowess of ChatGPT in generating text.</p>
 				<div id="logoWrapFooter">
 					<a href="#"><img id="logoCI" src="./img/CI_Financial_Logo.svg" alt="CI Financial Logo" /></a>
 				</div>
+				<p>The stated plans and deposits are simulated and aim to showcase the prowess of ChatGPT in generating text.</p>
+
 			</section>
 			<hr>
 			<p id="footerNote">
 			<p>&copy; 2024 Cumulus Pty Ltd. Trademarks and brands are the property of their respective owners.</p>
 			</p>
-		</footer>
-	</div>
+		</div>
+	</footer>
 
 	<script>
 		"use strict";
@@ -95,7 +94,6 @@
 		window.onload = (_e) => {
 			const domElements = {
 				summ: document.getElementById('newSumm'),
-				date: $('#datepicker'),
 				list: document.getElementById("list"),
 				percent: document.getElementById('percent'),
 				summLabel: document.getElementById('summLabel'),

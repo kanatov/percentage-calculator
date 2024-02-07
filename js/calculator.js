@@ -5,18 +5,6 @@ class Calculator {
         this.dom = _domElements;
         this.arr = [];
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-        $(this.dom.date).datepicker({
-            weekStart: 1,
-            format: "yyyy-mm-dd",
-            language: "en",
-            todayHighlight: true,
-            toggleActive: true,
-            endDate: new Date().toDateString(),
-            maxViewMode: 0
-        });
-
-        $(this.dom.date).datepicker('update', new Date().toDateString());
     }
 
     // Добавляем элемент в массив
