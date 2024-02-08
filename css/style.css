@@ -1,4 +1,6 @@
-/* reset */
+/*  __________
+    Reset
+*/
 
 html,
 body {
@@ -10,6 +12,7 @@ main,
 fieldset,
 input,
 label,
+legend,
 h1,
 ul,
 p {
@@ -47,7 +50,9 @@ main,
     width: 40rem;
 }
 
-/* topbar */
+/*  __________
+    Topbar
+*/
 
 #topbar {
     height: 2.5rem;
@@ -85,6 +90,7 @@ main,
     padding: .6rem 1rem;
     line-height: 4rem;
     border-radius: 2rem;
+    font-weight: 800;
 }
 
 #headerNav li a:hover {
@@ -94,9 +100,13 @@ main,
 
 #topbar .selected span {
     background-color: #cbd4d9;
+    cursor: default;
+
 }
 
-/* footer */
+/*  __________
+    Footer
+*/
 
 footer {
     background-color: #cbd4d9;
@@ -131,6 +141,7 @@ hr {
 
 #footerNav {
     margin-bottom: 1rem;
+    font-weight: 800;
 }
 
 footer hr {
@@ -146,7 +157,9 @@ footer hr {
     filter: brightness(0) invert(47%) sepia(100%) hue-rotate(140deg) saturate(20%);
 }
 
-/* main */
+/*  __________
+    Main
+*/
 
 main {
     flex-grow: 1;
@@ -161,13 +174,13 @@ main header {
 
 h1 {
     margin-bottom: 1rem;
+    font-size: 3rem;
 }
 
 #tagline {
     margin: auto;
     display: block;
     width: 30rem;
-    font-family: "DomaineText", Georgia, serif;
 }
 
 a {
@@ -177,7 +190,6 @@ a {
 
 .button {
     cursor: pointer;
-    cursor: hand;
 }
 
 input[type=number] {
@@ -190,92 +202,206 @@ input[type=number] {
     margin: 0;
 }
 
+/*  __________
+    Form
+*/
 
-#list {
-    display: block;
-    text-align: left;
-}
-
-#list li {
+#form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 2rem;
     margin-bottom: 1rem;
     padding: 1rem;
     background: white;
     border-radius: .3rem;
-    position: relative;
 }
 
-#list form {
+#form fieldset {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(6, 2.2rem);
+    gap: 1.5rem;
 }
 
-#list fieldset {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(5, 1fr);
-    gap: .5rem;
+.row-long {
+    grid-column: span 3;
 }
 
-#formInput label,
-#formResult label {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    /* color: #807169; */
+.row-medium {
+    grid-column: span 2;
 }
 
-#formResult label.calendar-row {
-    grid-column-start: 1;
-    grid-column-end: 2;
+.row-full {
+    grid-column: span 4;
 }
 
-#formResult span.calendar-row {
-    grid-column-start: 2;
-    grid-column-end: 4;
+.col-double {
+    grid-row: span 2;
 }
-
-
-/* #formResult {
-    display: grid;
-    grid-template-columns: 5rem auto;
-    grid-template-rows: repeat(4, 1fr);
-    gap: .5rem;
-} */
 
 #formInput {
     padding: 1rem 0;
+    padding-left: .5rem;
 }
 
-#list label,
-#list fieldset span {
-    line-height: 2.6rem;
+#form {
+    line-height: 2rem;
 }
 
-#formInput input {
+label.label {
+    font-weight: 800;
+
+}
+
+input.input {
     padding: .5rem;
-    height: 1.5rem;
-    max-width: 100%;
-    border: 1px solid #2a2f33;
-    border-radius: 3px;
+    border: .1rem solid #b8c0c8;
+    border-radius: .2rem;
+    overflow: hidden;
 }
 
-/*
- #list form span {
-    display: block;
-    line-height: 2.6rem;
-} 
+input[type="radio"] {
+    display: none;
+}
 
-*/
+.radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem
+}
+
+.radio-group label {
+    flex: 1;
+    text-align: center;
+    line-height: 1.9rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: #ebf0f4;
+
+}
+
+.radio-group label:has(input:checked) {
+    /* background-color: #cbd4d9; */
+    cursor: default;
+    box-shadow: inset 0 0 0 .08rem #545e66, inset 0 0 0 .2rem white;
+    /* border: .1rem solid white; */
+}
+
+#formPlanGroup {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0;
+}
+
+
+#planPro,
+#planPro:has(input:checked):hover {
+    color: white;
+    background: linear-gradient(0deg, #0092eb 0%, #28c4ff 100%);
+}
+
+#planPro:hover {
+    background: linear-gradient(0deg, #17a7ff 0%, #66d6ff 100%);
+}
+
+#planPro:has(input:checked) {
+    box-shadow: inset 0 0 0 .08rem #0092eb, inset 0 0 0 .15rem white;
+}
+
+#planPremium,
+#planPremium:has(input:checked):hover {
+    color: white;
+    background: linear-gradient(0deg, #111921 0%, #737373 100%);
+}
+
+#planPremium:hover {
+    background: linear-gradient(0deg, #111921 0%, #9a9a9a 100%);
+}
+
+#planPremium:has(input:checked) {
+    box-shadow: inset 0 0 0 .08rem #111921, inset 0 0 0 .15rem white;
+}
+
+#formDepositRangeRow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
+}
+
+#formDepositMin,
+#formDepositMax {
+    font-size: .8rem;
+    color: #667079;
+}
+
+#formDepositMax {
+    text-align: right;
+}
+
+#formDepositRange {
+    grid-column: span 2;
+}
 
 #formResult {
     padding: 1rem;
     background-color: #f5eee0;
+    border-radius: .2rem;
 }
 
 #formResult a:hover {
     background-color: #cad7e3;
 }
+
+#earnedInterest {
+    font-size: 1.6rem;
+    line-height: 1.5rem;
+    font-weight: 800;
+}
+
+#saveResultWrap {
+    grid-column: span 4;
+    text-align: center;
+}
+
+#saveResult {
+    width: 12rem;
+    height: 100%;
+
+    color: #2a2f33;
+
+    font-weight: normal;
+    padding-bottom: 0.2rem;
+    background: rgb(255, 188, 51);
+    background: linear-gradient(0deg, rgba(255, 188, 51, 1) 0%, rgba(255, 204, 102, 1) 100%);
+    border: 0;
+    border-radius: 2rem;
+
+}
+
+#saveResult:hover {
+    background-color: #ffbb33;
+}
+
+/*  __________
+    Saved results
+*/
+
+/* #list {
+    display: block;
+    text-align: left;
+} */
+
+/* #list li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: .3rem;
+    position: relative;
+} */
 
 .del {
     width: 2rem;
@@ -295,36 +421,4 @@ input[type=number] {
 .del:hover {
     color: #6c3939;
     background-color: #f8ecec;
-}
-
-#saveResultWrap {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    text-align: center;
-}
-
-#saveResult {
-    width: 12rem;
-    height: 100%;
-
-    color: #2a2f33;
-
-    font-weight: normal;
-    background-color: #ffcc66;
-    border: 0;
-    border-radius: 2rem;
-
-}
-
-#saveResult:hover {
-    background-color: #ffbb33;
-}
-
-#summLabel,
-#summValue {
-    display: none;
-}
-
-#summValue {
-    font-weight: bold;
 }
