@@ -1,444 +1,151 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
-	<title>Калюкулятор процентных вкладов</title>
+	<title>Fixed deposit calculator</title>
 	<meta charset="utf-8">
-	<script src="js/jquery-2.1.4.min.js"></script>
-	<script src="js/bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet" href="css/bootstrap-datepicker3.standalone.css">
-	<style>
-		html, body, #wrap {
-			height: 100%;
-			}
-				
-		body {
-			padding: 0px;
-			margin: 0px;
-			
-			font-size: 100%; 
-    		font-family: Verdana, Arial, Helvetica, sans-serif; 
-    		color: #000;
-			
-			background-color: #ebf0f4;
-			}
-		
-		#wrap {
-			display: table;
-			padding: 20px 0;
-			margin: auto;
-			width: 640px;
-			}
-		
-		main {
-			display: table-cell;
-			vertical-align: middle;
-						
-			margin: 0;
-			padding: 0;
-			}
-				
-		a {
-			text-decoration: none;
-			color: #444;
-			line-height: 30px;
-			}
-		
-		form {
-			text-align: left;
-			}
-		
-		input {
-			margin-top: 5px;
-			height: 20px;
-			
-			font-size: 100%; 
-    		font-family: Verdana, Arial, Helvetica, sans-serif; 
-			
-			cursor: pointer;
-			cursor: hand;
-			}
-
-		.inputText {
-			border: 1px solid #c0cad0;
-			border-radius: 3px;
-			}
-				
-		#newSumm, #newDate {
-			width: 160px;
-			}
-		
-		#newSumm {
-			margin-bottom: 10px;
-			}
-		
-		.cellLabel {
-			padding: 0;
-			margin: 0;
-			padding-top: 10px;
-			font-size: 13px;
-			line-height: 16px;
-			color: #a9b2b9;
-			letter-spacing: 0.7px;
-			}
-				
-		#list > li > .cells > .cellLabel:first-of-type,
-		#add .cellLabel:first-of-type {
-			padding-top: 3px;
-			}
-		
-		#percent {
-			width: 50px;
-			}
-		
-		.settLabel {
-			display: inline;
-			margin-right: 10px;
-			}
-		
-		#notify {
-			display: none;
-			
-			font-size: 70%;
-			font-style: italic;
-			}
-		
-		#list {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			width: 100%;
-			}
-		
-		#list > li {
-			margin-bottom: 3px;
-			background: white;
-			border-radius: 5px;
-			}
-				
-		#control {
-			padding: 20px;
-			margin-bottom: 3px;
-			background: rgba(255, 255, 255, 0.7);
-			
-			border-radius: 5px;
-			}
-		
-		#add {
-			padding-right: 28px;
-			border-right: 2px solid #ebf0f4;
-			}
-			
-		#description {
-			width: 280px;
-			color: #768693;
-			}
-		
-		.note {
-			margin: 0;
-			padding: 0;
-			}
-		
-		.cells {
-			display: inline-block;
-			padding: 10px;
-			margin-right: 3px;
-			
-			vertical-align: top;
-			}
-		
-		#list > li > .cells {
-			margin-right: 1px;
-			}
-		
-		#list > li > .cells:last-of-type {
-			border: 0;
-			margin-right: 0;
-			}
-		
-		#list > li > .cells:first-of-type {
-			width: 151px;
-			}
-		
-		.del {
-			width: 40px;
-			display: inline-block;
-			margin: 3px;
-			
-			line-height: 113px;
-			text-align: center;
-			vertical-align: middle;
-			font-weight: bold;
-			font-size: 120%;
-			color: #bc7070;
-			border-radius: 2px;
-			}
-		
-		.del:hover {
-			color: #6c3939;
-			background-color: #f8ecec;
-			}
-		
-		#newSubmit {
-			margin: 20px 0 10px;
-			height: 40px;
-			
-			width: 248px;
-			
-			color: #1c392a;
-			
-			font-weight: normal;
-			background-color: #aaf0cd;
-			border: 0;
-			border-radius: 2px;
-		}
-		
-		#newSubmit:hover {
-			background-color: #a1e0c0;
-		}
-		
-		.value {
-			height: 21px;
-			padding: 0;
-			margin: 0;
-			margin-bottom: 5px;
-			
-			overflow: hidden;
-			}
-		
-		#summLabel, #summValue {
-			display: none;
-		}
-		
-		#summValue {
-			font-weight: bold;
-		}
-	</style>
+	<script src="./js/calculator.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/style.css">
 </head>
-<body><div id="wrap">
-<main>
-	<div id="control">
-		<div id="add" class="cells">
-			<form onsubmit="return false">
-				<p class="cellLabel">Сумма вклада</p>
-				<input id="newSumm" class="inputText" type="number" name="summ" value="1500" onblur="calc.notify()">
-				<p class="cellLabel">Дата открытия влкда</p>
-				<div id="datepicker"></div>
-				<input id="newSubmit" type="submit"  value="Добавить" onClick="calc.add(); this.blur();" >
-			</form>
+
+<body>
+	<header id="topbar">
+		<div id="logoWrap">
+			<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
 		</div>
-		<div id="description" class="cells">
-			<p class="note">
-				Этот калькулятор поможет вам посчитать накопившуюся сумму ежемесячного накопительного вклада со дня вложения до сегодняшнего дня.
+		<ul id="headerNav">
+			<li class="selected"><span>Calculator</span></li>
+			<li><a href="#">Plans</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">About</a></li>
+		</ul>
+	</header>
+	<main>
+		<header>
+			<h1>Deposit calculator</h1>
+			<p id="tagline">
+				Calculate your deposit's maturity amount with monthly cumulative payouts
 			</p>
-			<form onsubmit="return false">
-				<p class="cellLabel">Месячная процентная ставка</p>
-				<input id="percent" class="inputText" type="number" min="1" name="summ" value="2" onchange="calc.render()">
-				<p class="settLabel">%</p>
-				<p id="summLabel" class="cellLabel">Общая сумма накоплений сегодня</p>
-				<p id="summValue" class="value"></p>
-			</form>
+		</header>
+		<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
+		<form id="form" onsubmit="return false">
+			<fieldset id="formInput">
+				<div id="formPlanGroup" class="col-double row-full">
+					<label class="label">Plan</label>
+					<div id="planGroup" class="radio-group row-long">
+						<label id="planBasic" for="basic" class="button">
+							Basic
+							<input type="radio" id="basic" name="plan" value="basic" checked />
+						</label>
+
+						<label id="planPro" for="pro" class="button">
+							Pro
+							<input type="radio" id="pro" name="plan" value="pro" />
+						</label>
+
+						<label id="planPremium" for="premium" class="button">
+							Premium
+							<input type="radio" id="premium" name="plan" value="premium" />
+						</label>
+					</div>
+
+				</div>
+
+
+				<div id="formDepositRangeRow" class="col-double row-full">
+					<label class="label">Initial deposit</label>
+					<input id="formDeposit" class="input" type="number" name="summ" value="35000" onblur="calc.notify()">
+					<input id="formDepositRange" type="range" name="volume" min="25000" max="250000" value="25000" step="1000" />
+					<label id="formDepositMin">25,000</label><label id="formDepositMax">250,000</label>
+				</div>
+
+				<label class="label">Period</label>
+				<div id="periodGroup" class="radio-group row-long">
+					<label for="preiod3" class="button">
+						3mo
+						<input type="radio" id="preiod3" name="period" value="preiod3" checked />
+					</label>
+
+					<label for="preiod4" class="button">
+						4mo
+						<input type="radio" id="preiod4" name="period" value="preiod4" />
+					</label>
+
+					<label for="preiod12" class="button">
+						12mo
+						<input type="radio" id="preiod12" name="period" value="preiod12" />
+					</label>
+				</div>
+
+				<label class="label row-medium">Interest rate</label>
+				<span id="formPercent" class="input row-medium">2%</span>
+			</fieldset>
+			<fieldset id="formResult">
+				<label class="label">From</label>
+				<span class="input row-long">
+					<span id="resultFromDate" class="value">20 March 2024</span>
+				</span>
+				<label class="label">To</label>
+				<span class="input row-long">
+					<aspan id="resultToDate" class="value">30 March 2024</aspan>
+				</span>
+				<label class="label row-medium">Total savings</label>
+				<span class="input row-medium">37,100</span>
+				<label class="label row-medium">Earned interest</label>
+				<span id="earnedInterest" class="input row-medium">21,000</span>
+				<div id="saveResultWrap">
+					<input id="saveResult" class="button" type="submit" value="Save result" onClick="calc.add(); this.blur();">
+				</div>
+			</fieldset>
+		</form>
+		<ul id="savedResults">
+			<li>
+
+			</li>
+		</ul>
+	</main>
+	<footer>
+		<div id="footerWrap">
+			<ul id="footerNav">
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms of Service</a></li>
+				<li><a href="#">Cookie Policy</a></li>
+				<li><a href="#">Contact us</a></li>
+			</ul>
+			<section id="footerLinks">
+				<div id="logoWrapFooter">
+					<a href="#"><img id="logoCI" src="./img/CI_Financial_Logo.svg" alt="CI Financial Logo" /></a>
+				</div>
+				<p>The stated plans and deposits are simulated and aim to showcase the prowess of ChatGPT in generating text.</p>
+
+			</section>
+			<hr>
+			<p id="footerNote">
+			<p>&copy; 2024 Cumulus Pty Ltd. Trademarks and brands are the property of their respective owners.</p>
+			</p>
 		</div>
-	</div>
-	<ul id="list">
-	</ul>
-</main></div>
-<script>
-	var summ = document.getElementById('newSumm'),
-		date = $('#datepicker'),
-		list = document.getElementById('list'),
-		percent = document.getElementById('percent'),
-		summLabel = document.getElementById('summLabel'),
-		summValue = document.getElementById('summValue'),
-		submit = document.getElementById('newSubmit'),
+	</footer>
 
-		monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
+	<script>
+		"use strict";
 
-		calc = {
-		arr : [],
+		var calc;
+		window.onload = (_e) => {
+			const domElements = {
+				summ: document.getElementById('newSumm'),
+				list: document.getElementById("list"),
+				percent: document.getElementById('percent'),
+				summLabel: document.getElementById('summLabel'),
+				summValue: document.getElementById('summValue'),
+				submit: document.getElementById('newSubmit')
+			};
 
-		// Добавляем элемент в массив
-		add : function () {				
-			if (+summ.value > 0) {
-				var newDate = new Date(date.datepicker('getDate'));
-				this.arr.push({'summ' : +summ.value, 'date' : newDate});
-
-				this.arr.sort(function(a,b){
-					return b.date - a.date;
-				});
-
-				summ.value = '1500';
-
-				this.render();
-			} else {
-				this.notify(1);
-			}
-		},
-
-		// Удаляем элемент из массива
-		remove : function (n) {
-			this.arr.splice(n,1);
-			this.render();
-		},
-
-		// Калькулятор процентов, дней, месяцев
-		calc : function (s,d) {
-			var calc = {},
-				c = new Date(d),
-				t = new Date(),
-				todayD = t.getDate(),
-				todayM = t.getMonth(),
-				todayY = t.getFullYear(),
-				todayDays = md(todayY, todayM),
-				nextDays = md(todayY, todayM + 1),
-				contD = c.getDate(),
-				contM = c.getMonth(),
-				contY = c.getFullYear(),
-				m,
-				d = 0;
-
-			// Дней в месяце
-			function md (y,m) {
-				var d = new Date(y, m + 1, 0)
-				return d.getDate();
-			}
-
-			// Разница в месяцах
-			m = (todayY - contY) * 12;
-			m -= contM;
-			m += todayM;
-			
-			// Разница в днях
-			if (m) {
-				//месяц случился, была ли выплата?
-				if (contD > todayD) {
-					// дата контракта больше чем дата сегодня
-					if (todayD < todayDays) {
-						// сегодня не последний день месяца
-						m--;
-						d = (todayDays - todayD);
-						d += contD > nextDays ? nextDays : contD;
-					} else {
-						// сегодня последний день месяца
-						d = contD > nextDays ? nextDays : contD;
-					}
-				} else {
-					// дата контракта меньше или равна сегодняшней дате
-					// значит выплата была
-					d = (todayDays - todayD);
-					d += contD > nextDays ? nextDays : contD;
-				}
-			} else {
-				if (contD > todayD) {
-					d = contD - todayD;
-				} else {
-					d = (todayDays - todayD);
-					d += contD > nextDays ? nextDays : contD;
-				}
-			}
-
-			// Считаем проценты
-			function p (s,m) {
-				var i;
-				for (i = 0; i < m; i++) {
-					s += (s * parseFloat(percent.value))/100;
-				}
-				return +s.toFixed(2);
-			}
-
-			calc.m = m;
-			calc.s = p(s,m);
-			calc.sn = p(s,m + 1);				
-			calc.d = d;
-
-			return calc;
-		},
-
-		// Отрисовываем массив объектов arr
-		render : function () {		
-			var i,
-				summ = 0;
-				
-			function rusNum (number, titles) {  
-				var cases = [2, 0, 1, 1, 1, 2];  
-				return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
-			}
-			
-			list.innerHTML = ''; 
-
-			// Печатаем массив
-			for (i = this.arr.length - 1; i >= 0; i--) {
-				var h = '';
-
-				summ += this.calc(this.arr[i].summ, this.arr[i].date).s;
-
-				h += '<li>';
-					h += '<a class="del" href="#" onClick="calc.remove('+i+')">×</a>';
-					h += '<div class="cells">';
-						h += '<p class="cellLabel">Вклад</p><p class="value">';
-						h += this.arr[i].summ;
-						h += '</p>';
-						h += '<p class="cellLabel">Дата вклада</p><p class="value">';
-						h += this.arr[i].date.getDate();
-						h += ' ';
-						h += monthNames[this.arr[i].date.getMonth()];
-						h += ' ';
-						h += this.arr[i].date.getFullYear();
-					h += '</p></div>';
-
-					h += '<div class="cells">';
-						h += '<p class="cellLabel">Сумма накоплений сегодня</p>';
-						h += '<p class="cellLabel">Сумма накоплений через ';
-						h += this.calc(this.arr[i].summ, this.arr[i].date).d;
-						h += ' ';
-						h += rusNum(this.calc(this.arr[i].summ, this.arr[i].date).d,['день','дня','дней']);
-						h += '<p class="cellLabel">Количество выплат</p>';
-					h += '</div>';					
-
-					h += '<div class="cells">';
-						h += '<p class="value"><b>';
-						h += this.calc(this.arr[i].summ, this.arr[i].date).s;
-						h += '</b></p>';
-						h += '<p class="value">';
-						h += this.calc(this.arr[i].summ, this.arr[i].date).sn;
-						h += '</p><p class="value">';
-						h += this.calc(this.arr[i].summ, this.arr[i].date).m;
-						h += '</p>';
-					h += '</div>';					
-				h += '</li>';
-
-				list.innerHTML += h;
-			}
-
-			if (this.arr.length > 1) {
-				summValue.innerHTML = summ.toFixed(2);
-				summLabel.style.display = 'inherit';
-				summValue.style.display = 'inherit';				
-			} else {
-				summLabel.style.display = 'none';
-				summValue.style.display = 'none';
-			}
-		},
-
-		notify : function (msg) {
-			if (msg) {
-				summ.style.borderColor = 'red';
-			} else {
-				summ.style.borderColor = '';
-			}
+			calc = new Calculator(domElements);
 		}
-	};
-	
-    $('#datepicker').datepicker({
-        weekStart: 1,
-		format: "yyyy-mm-dd",
-        language: "ru",
-        todayHighlight: true,
-        toggleActive: true,
-		endDate: new Date().toDateString(),
-		maxViewMode: 0
-    });
-	
-	$('#datepicker').datepicker('update', new Date().toDateString());
-</script>
+	</script>
 </body>
+
 </html>
