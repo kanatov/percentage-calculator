@@ -93,9 +93,9 @@
 					<aspan id="resultToDate" class="value">30 March 2024</aspan>
 				</span>
 				<label class="label row-medium">Total savings</label>
-				<span class="input row-medium">37,100</span>
+				<span id="resultSavings" class="input row-medium">37,100</span>
 				<label class="label row-medium">Earned interest</label>
-				<span id="earnedInterest" class="input row-medium">21,000</span>
+				<span id="resultInterest" class="input row-medium">21,000</span>
 				<div id="saveResultWrap">
 					<input id="saveResult" class="button" type="submit" value="Save this quote" onClick="calc.add(); this.blur();">
 				</div>
@@ -133,16 +133,32 @@
 		"use strict";
 
 		var calc;
-		window.onload = (_e) => {
-			const domElements = {
-				summ: document.getElementById('newSumm'),
-				list: document.getElementById("list"),
-				percent: document.getElementById('percent'),
-				summLabel: document.getElementById('summLabel'),
-				summValue: document.getElementById('summValue'),
-				submit: document.getElementById('newSubmit')
-			};
+		window.onload = _e => {
+			const domElements = {};
+			// Plan group
+			domElements.planGroup = document.getElementById('planGroup');
 
+			// Initial Deposit group
+			domElements.formDeposit = document.getElementById('formDeposit');
+			domElements.formDepositRange = document.getElementById('formDepositRange');
+			domElements.formDepositMin = document.getElementById('formDepositMin');
+			domElements.formDepositMax = document.getElementById('formDepositMax');
+
+			// Period group
+			domElements.periodGroup = document.getElementById('periodGroup');
+
+			// Interest rate
+			domElements.formPercent = document.getElementById('formPercent');
+			
+			// Result form
+			domElements.resultFromDate = document.getElementById('resultFromDate');
+			domElements.resultToDate = document.getElementById('resultToDate');
+			domElements.resultSavings = document.getElementById('resultSavings');
+			domElements.resultInterest = document.getElementById('resultInterest');
+
+			// Save result button
+			domElements.saveResult = document.getElementById('saveResult');
+			
 			calc = new Calculator(domElements);
 		}
 	</script>
