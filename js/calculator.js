@@ -3,10 +3,12 @@
 class Calculator {
     constructor(_domElements) {
         this.dom = _domElements;
-        this.arr = [];
+        // this.arr = [];
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     }
 
+
+    /*
     // Добавляем элемент в массив
     add() {
         if (+this.dom.summ.value > 0) {
@@ -171,4 +173,5 @@ class Calculator {
             this.dom.summ.style.borderColor = '';
         }
     }
+    */
 }
