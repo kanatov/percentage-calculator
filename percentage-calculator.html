@@ -132,34 +132,106 @@
 	<script>
 		"use strict";
 
-		var calc;
+		let calc;
+
+		// Calc dom elements 
+		const domElements = {};
+		// Plan group
+		domElements.planGroup = document.getElementById('planGroup');
+
+		// Initial Deposit group
+		domElements.formDeposit = document.getElementById('formDeposit');
+		domElements.formDepositRange = document.getElementById('formDepositRange');
+		domElements.formDepositMin = document.getElementById('formDepositMin');
+		domElements.formDepositMax = document.getElementById('formDepositMax');
+
+		// Period group
+		domElements.periodGroup = document.getElementById('periodGroup');
+
+		// Interest rate
+		domElements.formPercent = document.getElementById('formPercent');
+		
+		// Result form
+		domElements.resultFromDate = document.getElementById('resultFromDate');
+		domElements.resultToDate = document.getElementById('resultToDate');
+		domElements.resultSavings = document.getElementById('resultSavings');
+		domElements.resultInterest = document.getElementById('resultInterest');
+
+		// Save result button
+		domElements.saveResult = document.getElementById('saveResult');
+		
+		// Calc plans
+		const plans = [
+			{
+				name: 'Basic',
+				category: 0,
+				maxDeposit: 250000,
+				interestRates: [
+					{
+						minDeposit: 25000,
+						rate: 3.5,
+						period: 2
+					},
+					{
+						minDeposit: 100000,
+						rate: 3,
+						period: 4
+					},
+					{
+						minDeposit: 175000,
+						rate: 2.5,
+						period: 10
+					}
+				]					
+			},
+			{
+				name: 'Pro',
+				category: 1,
+				maxDeposit: 375000,
+				interestRates: [
+					{
+						minDeposit: 20000,
+						rate: 4,
+						period: 3
+					},
+					{
+						minDeposit: 140000,
+						rate: 3.5,
+						period: 6
+					},
+					{
+						minDeposit: 250000,
+						rate: 2.5,
+						period: 12
+					}
+				]					
+			},
+			{
+				name: 'Premium',
+				category: 2,
+				maxDeposit: 450000,
+				interestRates: [
+					{
+						minDeposit: 15000,
+						rate: 4.5,
+						period: 4
+					},
+					{
+						minDeposit: 160000,
+						rate: 4,
+						period: 8
+					},
+					{
+						minDeposit: 305000,
+						rate: 3,
+						period: 14
+					}
+				]					
+			}
+		];
+
 		window.onload = _e => {
-			const domElements = {};
-			// Plan group
-			domElements.planGroup = document.getElementById('planGroup');
-
-			// Initial Deposit group
-			domElements.formDeposit = document.getElementById('formDeposit');
-			domElements.formDepositRange = document.getElementById('formDepositRange');
-			domElements.formDepositMin = document.getElementById('formDepositMin');
-			domElements.formDepositMax = document.getElementById('formDepositMax');
-
-			// Period group
-			domElements.periodGroup = document.getElementById('periodGroup');
-
-			// Interest rate
-			domElements.formPercent = document.getElementById('formPercent');
-			
-			// Result form
-			domElements.resultFromDate = document.getElementById('resultFromDate');
-			domElements.resultToDate = document.getElementById('resultToDate');
-			domElements.resultSavings = document.getElementById('resultSavings');
-			domElements.resultInterest = document.getElementById('resultInterest');
-
-			// Save result button
-			domElements.saveResult = document.getElementById('saveResult');
-			
-			calc = new Calculator(domElements);
+			calc = new Calculator(domElements, plans);
 		}
 	</script>
 </body>

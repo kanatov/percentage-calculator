@@ -1,10 +1,13 @@
 "use strict";
 
 class Calculator {
-    constructor(_domElements) {
-        this.dom = _domElements;
+    constructor(domElements, plans) {
+        this.dom = domElements;
+        this.plans = plans;
         // this.arr = [];
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        console.log(this.dom);
+        console.log(this.plans);
     }
 
 
