@@ -4,7 +4,6 @@ class Calculator {
     constructor(domElements, plans) {
         this.dom = domElements;
         this.plans = plans;
-        // this.arr = [];
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         this.render();
     }
@@ -113,6 +112,7 @@ class Calculator {
         const node = template.childNodes[1];
         return node;
     }
+
     getDate(months = 0) {
         // upcoming month calculation here
 
@@ -126,7 +126,34 @@ class Calculator {
 
         return dateValue;
     }
-    // Отрисовываем массив объектов arr
+
+    setUpdateCallback(element) {
+        function callback() {
+            console.log(1)
+        }
+        switch (element.type) {
+            case 'radio':
+                element.addEventListener('change', callback);
+                break;
+            case 'range':
+                // element.addEventListener('change', callback);
+                element.addEventListener('input', callback);
+                break;
+
+            case 'submit':
+                element.addEventListener('click', callback);
+                break;
+
+            default:
+                element.onblur = callback;
+        }
+
+    }
+
+    update() {
+        console.log('update');
+    }
+
     render() {
         // Plans
         const newPlanGroupElement = this.getTemplate('planGroupElement');
@@ -140,16 +167,19 @@ class Calculator {
         newPlanGroupElementInput.id = 'basic';
         newPlanGroupElementInput.value = 'basic';
         newPlanGroupElementInput.checked = true;
+        this.setUpdateCallback(newPlanGroupElementInput);
 
         this.dom.planGroup.appendChild(newPlanGroupElement);
 
         // Initial deposit
         const formDeposit = this.dom.formDeposit;
         formDeposit.value = '1000';
+        this.setUpdateCallback(formDeposit);
 
         const formDepositRange = this.dom.formDepositRange;
         formDepositRange.min = '50000';
         formDepositRange.max = '200000';
+        this.setUpdateCallback(formDepositRange);
 
         const formDepositMin = this.dom.formDepositMin;
         formDepositMin.textContent = '50000';
@@ -158,7 +188,6 @@ class Calculator {
         formDepositMax.textContent = '200000';
 
         // Periods
-
         const newPeriodGroupElement = this.getTemplate('periodGroupElement');
         newPeriodGroupElement.htmlFor = 'preiod3';
 
@@ -169,11 +198,11 @@ class Calculator {
         newPeriodGroupElementInput.id = 'preiod3';
         newPeriodGroupElementInput.value = 'preiod3';
         newPeriodGroupElementInput.checked = true;
+        this.setUpdateCallback(newPeriodGroupElementInput);
 
         this.dom.periodGroup.appendChild(newPeriodGroupElement);
 
         // Interest
-
         const formPercent = this.dom.formPercent;
         formPercent.textContent = '2%';
 
@@ -189,5 +218,10 @@ class Calculator {
 
         const resultInterest = this.dom.resultInterest;
         resultInterest.textContent = '2000';
+
+        // Save button
+        const saveResult = this.dom.saveResult;
+        this.setUpdateCallback(saveResult);
+
     }
 }
