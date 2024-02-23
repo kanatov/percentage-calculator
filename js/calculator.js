@@ -108,17 +108,86 @@ class Calculator {
         return calc;
     }
 */
+    getTemplate(templateName) {
+        const template = this.dom[templateName].content.cloneNode(true);
+        const node = template.childNodes[1];
+        return node;
+    }
+    getDate(months = 0) {
+        // upcoming month calculation here
+
+        const date = new Date();
+        let dateValue = '';
+        dateValue += date.getDate();
+        dateValue += ' ';
+        dateValue += this.monthNames[date.getMonth()];
+        dateValue += ' ';
+        dateValue += date.getFullYear();
+
+        return dateValue;
+    }
     // Отрисовываем массив объектов arr
     render() {
+        // Plans
+        const newPlanGroupElement = this.getTemplate('planGroupElement');
+        newPlanGroupElement.id = 'planBasic'; // fix
+        newPlanGroupElement.htmlFor = 'basic';
 
+        const newPlanGroupElementText = newPlanGroupElement.childNodes[0];
+        newPlanGroupElementText.textContent = 'basic';
+
+        const newPlanGroupElementInput = newPlanGroupElement.childNodes[1];
+        newPlanGroupElementInput.id = 'basic';
+        newPlanGroupElementInput.value = 'basic';
+        newPlanGroupElementInput.checked = true;
+
+        this.dom.planGroup.appendChild(newPlanGroupElement);
+
+        // Initial deposit
+        const formDeposit = this.dom.formDeposit;
+        formDeposit.value = '1000';
+
+        const formDepositRange = this.dom.formDepositRange;
+        formDepositRange.min = '50000';
+        formDepositRange.max = '200000';
+
+        const formDepositMin = this.dom.formDepositMin;
+        formDepositMin.textContent = '50000';
+
+        const formDepositMax = this.dom.formDepositMax;
+        formDepositMax.textContent = '200000';
+
+        // Periods
+
+        const newPeriodGroupElement = this.getTemplate('periodGroupElement');
+        newPeriodGroupElement.htmlFor = 'preiod3';
+
+        const newPeriodGroupElementText = newPeriodGroupElement.childNodes[0];
+        newPeriodGroupElementText.textContent = '4mo';
+
+        const newPeriodGroupElementInput = newPeriodGroupElement.childNodes[1];
+        newPeriodGroupElementInput.id = 'preiod3';
+        newPeriodGroupElementInput.value = 'preiod3';
+        newPeriodGroupElementInput.checked = true;
+
+        this.dom.periodGroup.appendChild(newPeriodGroupElement);
+
+        // Interest
+
+        const formPercent = this.dom.formPercent;
+        formPercent.textContent = '2%';
+
+        // Result form
+        const resultFromDate = this.dom.resultFromDate;
+        resultFromDate.textContent = this.getDate();
+
+        const resultToDate = this.dom.resultToDate;
+        resultToDate.textContent = this.getDate();
+
+        const resultSavings = this.dom.resultSavings;
+        resultSavings.textContent = '1000';
+
+        const resultInterest = this.dom.resultInterest;
+        resultInterest.textContent = '2000';
     }
-    /*
-        notify(msg) {
-            if (msg) {
-                this.dom.summ.style.borderColor = 'red';
-            } else {
-                this.dom.summ.style.borderColor = '';
-            }
-        }
-        */
 }

@@ -100,8 +100,8 @@
 	</footer>
 	<div id="templates">
 		<template id="planGroupElement">
-			<label id="" for="" class="button">
-				<input type="radio" id="" name="plan" value="" />
+			<label class="button">
+				<input type="radio" name="plan" />
 			</label>
 		</template>
 		<template id="periodGroupElement">
@@ -141,6 +141,11 @@
 
 		// Save result button
 		domElements.saveResult = document.getElementById('saveResult');
+
+		// Templates
+		domElements.planGroupElement = document.getElementById('planGroupElement');
+		domElements.periodGroupElement = document.getElementById('periodGroupElement');
+
 
 		// Calc plans
 		const plans = [
