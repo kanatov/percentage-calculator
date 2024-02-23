@@ -432,3 +432,7 @@ input[type="radio"] {
     color: #6c3939;
     background-color: #f8ecec;
 }
+
+#templates {
+    display: none;
+}
