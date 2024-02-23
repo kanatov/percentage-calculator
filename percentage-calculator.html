@@ -41,7 +41,7 @@
 
 				<div id="formDepositRangeRow" class="col-double row-full">
 					<label class="label">Initial deposit</label>
-					<input id="formDeposit" class="input" type="number" name="summ" value="" onblur="calc.notify()">
+					<input id="formDeposit" class="input" type="number" name="summ" value="" />
 					<input id="formDepositRange" type="range" name="volume" min="" max="" value="" step="1000" />
 					<label id="formDepositMin"></label><label id="formDepositMax"></label>
 				</div>
@@ -66,7 +66,7 @@
 				<label class="label row-medium">Earned interest</label>
 				<span id="resultInterest" class="input row-medium"></span>
 				<div id="saveResultWrap">
-					<input id="saveResult" class="button" type="submit" value="Save this quote" onClick="calc.add(); this.blur();">
+					<input id="saveResult" class="button" type="submit" value="Save this quote" />
 				</div>
 			</fieldset>
 		</form>
