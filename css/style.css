@@ -256,7 +256,6 @@ input[type=number] {
 
 label.label {
     font-weight: 600;
-
 }
 
 input.input {
@@ -264,6 +263,7 @@ input.input {
     border: .1rem solid #b8c0c8;
     border-radius: .2rem;
     overflow: hidden;
+    height: 1rem;
 }
 
 input[type="radio"] {
@@ -274,7 +274,7 @@ input[type="radio"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .5rem
+    gap: .5rem;
 }
 
 .radio-group label {
@@ -338,7 +338,7 @@ input[type="radio"] {
 
 #formDepositRangeRow {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 50%);
     grid-template-rows: repeat(3, 1fr);
     gap: 0;
 }
