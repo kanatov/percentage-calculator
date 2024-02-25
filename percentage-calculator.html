@@ -38,12 +38,12 @@
 					<div id="planGroup" class="radio-group row-long"></div>
 				</div>
 
-
 				<div id="formDepositRangeRow" class="col-double row-full">
 					<label class="label">Initial deposit</label>
-					<input id="formDeposit" class="input" type="number" name="summ" value="" />
-					<input id="formDepositRange" type="range" name="volume" min="" max="" value="" step="1000" />
-					<label id="formDepositMin"></label><label id="formDepositMax"></label>
+					<input id="formDeposit" class="input" type="number" value="" />
+					<input id="formDepositRange" type="range" min="" max="" value="" step="1000" />
+					<label id="formDepositMin"></label>
+					<label id="formDepositMax"></label>
 				</div>
 
 				<label class="label">Period</label>
@@ -105,8 +105,8 @@
 			</label>
 		</template>
 		<template id="periodGroupElement">
-			<label for="preiod3" class="button">
-				<input type="radio" id="preiod3" name="period" value="preiod3" />
+			<label class="button">
+				<input type="radio" name="period" />
 			</label>
 		</template>
 	</div>
@@ -147,7 +147,7 @@
 		domElements.periodGroupElement = document.getElementById('periodGroupElement');
 
 
-		// Calc plans
+		// Plans configuration
 		const plans = [
 			{
 				name: 'Basic',
@@ -161,12 +161,12 @@
 					},
 					{
 						minDeposit: 100000,
-						rate: 3,
-						period: 4
+						rate: 3
 					},
 					{
 						minDeposit: 175000,
-						rate: 2.5
+						rate: 2.5,
+						period: 4
 					}
 				]
 			},
@@ -216,9 +216,7 @@
 			}
 		];
 
-		window.onload = _e => {
-			calc = new Calculator(domElements, plans);
-		}
+		window.onload = () => calc = new Calculator(domElements, plans);
 	</script>
 </body>
 
