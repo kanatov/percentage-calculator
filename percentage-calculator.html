@@ -31,7 +31,7 @@
 			</p>
 		</header>
 		<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
-		<form id="form" onsubmit="return false">
+		<form id="form">
 			<fieldset id="formInput">
 				<div id="formPlanGroup" class="col-double row-full">
 					<label class="label">Plan</label>
@@ -40,7 +40,7 @@
 
 				<div id="formDepositRangeRow" class="col-double row-full">
 					<label class="label">Initial deposit</label>
-					<input id="formDeposit" class="input" type="number" value="" />
+					<input id="formDeposit" class="input" type="text" value="" />
 					<input id="formDepositRange" type="range" min="" max="" value="" step="1000" />
 					<label id="formDepositMin"></label>
 					<label id="formDepositMax"></label>
@@ -140,7 +140,7 @@
 		domElements.resultInterest = document.getElementById('resultInterest');
 
 		// Save result button
-		domElements.saveResult = document.getElementById('saveResult');
+		domElements.form = document.getElementById('form');
 
 		// Templates
 		domElements.planGroupElement = document.getElementById('planGroupElement');
