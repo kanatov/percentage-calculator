@@ -5,28 +5,28 @@ class Calculator {
         this.dom = domElements;
         this.plans = plans;
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        this.current = {
-            plan: this.plans[0],
-            deposit: 0,
-            preiod: 0,
-            interest: 0
-        };
+        this.current = {};
 
-        // init form
-        this.initPlans();
-        this.initDeposit();
-        this.initPeriods();
-        this.initInterest();
-        this.initSave();
-        this.initResults();
+        this.event('init');
     }
 
     setCurrentPlan(planIndex) {
         this.current.plan = this.plans[planIndex];
     }
 
+
     setCurrentDeposit(deposit) {
-        this.current.deposit = deposit;
+        const minDeposit = this.current.plan.interestRates[0].minDeposit;
+        const maxDeposit = this.current.plan.maxDeposit;
+
+        let newDeposit = deposit || this.current.deposit || 0;
+        newDeposit = this.clamp(newDeposit, minDeposit, maxDeposit);
+
+        this.current.deposit = newDeposit;
+    }
+
+    clamp(value, min, max) {
+        return Math.min(Math.max(min, value), max);
     }
 
     setCurrentPeriod(preiod) {
@@ -55,13 +55,13 @@ class Calculator {
             this.notify(1);
         }
     }
-    
+     
     // Удаляем элемент из массива
     remove(n) {
         this.arr.splice(n, 1);
         this.init();
     }
-    
+     
     // Калькулятор процентов, дней, месяцев
     calc(s, d) {
         var calc = {},
@@ -83,7 +83,7 @@ class Calculator {
             var d = new Date(y, m + 1, 0)
             return d.getDate();
         }
-
+     
         // Разница в месяцах
         m = (todayY - contY) * 12;
         m -= contM;
@@ -134,7 +134,7 @@ class Calculator {
         
         return calc;
     }
-*/
+    */
     getTemplate(templateName) {
         const template = this.dom[templateName].content.cloneNode(true);
         const node = template.childNodes[1];
@@ -161,6 +161,33 @@ class Calculator {
         }
     }
 
+    initDepositRanges() {
+        // Refresh interest ranges
+        this.current.depositRanges = {};
+        const currentRates = this.current.plan.interestRates;
+        const ratesDepositsArray = currentRates.map(rate => rate.minDeposit);
+        const cap = this.current.plan.maxDeposit;
+        let depositRanges = [];
+
+        for (let i = 0; i < currentRates.length; i++) {
+            const min = currentRates[i].minDeposit;
+            let max;
+
+            if (typeof currentRates[i + 1] !== 'undefined') {
+                max = currentRates[i + 1].minDeposit - 1;
+            }
+            const range = {
+                min: min,
+                max: max
+            };
+            depositRanges.push(range);
+        }
+
+        depositRanges[depositRanges.length - 1].max = cap;
+        this.current.depositRanges = depositRanges;
+
+    }
+
     initPlans() {
         const numberOfPlans = this.plans.length;
 
@@ -168,6 +195,7 @@ class Calculator {
             const planName = this.plans[i].name;
             const category = this.plans[i].category;
 
+            //Radiogroup template and values
             const newPlanGroupElement = this.getTemplate('planGroupElement');
             switch (category) {
                 case 1:
@@ -181,6 +209,7 @@ class Calculator {
                 default:
                     newPlanGroupElement.id = 'planBasic';
             }
+
             newPlanGroupElement.htmlFor = planName;
 
             const newPlanGroupElementText = newPlanGroupElement.childNodes[0];
@@ -190,17 +219,14 @@ class Calculator {
             newPlanGroupElementInput.id = planName;
             newPlanGroupElementInput.value = i;
 
-            if (planName === this.current.plan.name) {
+            if (i === 0) {
                 newPlanGroupElementInput.checked = true;
             }
 
+            //Event listener
             newPlanGroupElementInput.addEventListener('change', (e) => {
-                const target = e.target;
-                this.setCurrentPlan(target.value);
-                this.initDeposit();
-                this.initPeriods();
-                this.initInterest();
-                this.initResults();
+                const value = e.target.value;
+                this.event('plans', value);
             });
 
             this.dom.planGroup.appendChild(newPlanGroupElement);
@@ -208,30 +234,17 @@ class Calculator {
     }
 
     initDeposit() {
-        const minDeposit = this.current.plan.interestRates[0].minDeposit;
-        const maxDeposit = this.current.plan.maxDeposit;
-
-        let newDeposit = this.current.deposit || minDeposit;
-        if (newDeposit > maxDeposit) {
-            newDeposit = maxDeposit;
-        }
-        this.current.deposit = newDeposit;
-
         const formDeposit = this.dom.formDeposit;
-        formDeposit.value = this.current.deposit;
-        formDeposit.addEventListener('change', () => console.log(1));
+        formDeposit.addEventListener('change', (e) => {
+            const value = e.target.value;
+            this.event('deposit input', value);
+        });
 
         const formDepositRange = this.dom.formDepositRange;
-        formDepositRange.min = minDeposit;
-        formDepositRange.max = maxDeposit;
-        formDepositRange.value = this.current.deposit;
-        formDepositRange.addEventListener('input', () => console.log(1));
-
-        const formDepositMin = this.dom.formDepositMin;
-        formDepositMin.textContent = minDeposit;
-
-        const formDepositMax = this.dom.formDepositMax;
-        formDepositMax.textContent = maxDeposit;
+        formDepositRange.addEventListener('input', (e) => {
+            const value = e.target.value;
+            this.event('deposit range', value);
+        });
     }
 
     initPeriods() {
@@ -245,6 +258,8 @@ class Calculator {
             if (Object.hasOwn(rate, 'period')) {
                 const period = rate.period;
                 const id = 'preiod' + period;
+
+                //Radiogroup template and values
                 const newPeriod = this.getTemplate('periodGroupElement');
                 newPeriod.htmlFor = id;
 
@@ -257,36 +272,109 @@ class Calculator {
                 if (i === 0) {
                     newPeriodInput.checked = true;
                 }
-                newPeriodInput.addEventListener('change', () => console.log(1));
+
+                //Event listener
+                newPeriodInput.addEventListener('change', (e) => {
+                    const value = e.target.value;
+                    this.event('period', value);
+                });
 
                 this.dom.periodGroup.appendChild(newPeriod);
             }
         }
     }
 
-    initInterest() {
-        const currentRates = this.current.plan.interestRates;
-        const ratesArray = currentRates.map(rate => rate.minDeposit);
-        ratesArray.push(this.current.plan.maxDeposit);
-
-        const rateDepositMatch = ratesArray.findIndex(rate => rate > this.current.deposit) - 1;
-        const rateDepositIndex = rateDepositMatch !== -1 ? rateDepositMatch : ratesArray.length;
-
-        const ratePeriodIndex = ratesArray.findIndex(rate => {
-            Object.hasOwn(rate, 'period') ? rate.period === this.current.preiod : false;
-        });
-
-        const planIndex = rateDepositIndex > ratePeriodIndex ? rateDepositIndex : ratePeriodIndex;
-        this.current.interest = currentRates[planIndex].rate;
-        const formPercent = this.dom.formPercent;
-        formPercent.textContent = this.current.interest;
-    }
-
     initSave() {
-        const saveResult = this.dom.saveResult;
+        const form = this.dom.form;
+        form.addEventListener('submit', (e) => {
+            this.event('save');
+            e.preventDefault();
+        });
     }
 
-    initResults() {
+    event(event, value) {
+        switch (event) {
+            case 'init':
+                this.initPlans();
+                this.initDeposit();
+                this.initSave();
+                this.event('plans', 0);
+                break;
+            case 'plans':
+                this.setCurrentPlan(value);
+                this.setCurrentDeposit();
+                this.initDepositRanges();
+                this.setCurrentPeriod(0);
+                this.updateDepositInput();
+                this.updateDepositRange();
+                this.updateDepositMinMax();
+                this.initPeriods();
+                this.updateInterest();
+                break;
+            case 'deposit input':
+                this.setCurrentDeposit(value);
+                this.updateDepositRange();
+                this.updateInterest();
+                break;
+            case 'deposit range':
+                this.setCurrentDeposit(value);
+                this.updateDepositInput();
+                this.updateInterest();
+                break;
+            case 'period':
+                this.setCurrentPeriod(value);
+                this.updateInterest();
+                break;
+            case 'save':
+                console.log('save');
+                break;
+        }
+        this.updateResults();
+    }
+
+    updateDepositInput() {
+        const formDeposit = this.dom.formDeposit;
+        formDeposit.value = this.current.deposit;
+    }
+
+    updateDepositRange() {
+        const minDeposit = this.current.plan.interestRates[0].minDeposit;
+        const maxDeposit = this.current.plan.maxDeposit;
+
+        const formDepositRange = this.dom.formDepositRange;
+        formDepositRange.min = minDeposit;
+        formDepositRange.max = maxDeposit;
+        formDepositRange.value = this.current.deposit;
+    }
+
+    updateDepositMinMax() {
+        const minDeposit = this.current.plan.interestRates[0].minDeposit;
+        const maxDeposit = this.current.plan.maxDeposit;
+
+        const formDepositMin = this.dom.formDepositMin;
+        formDepositMin.textContent = minDeposit;
+
+        const formDepositMax = this.dom.formDepositMax;
+        formDepositMax.textContent = maxDeposit;
+    }
+
+    getInterestIndex() {
+        const deposit = this.current.deposit;
+        const ranges = this.current.depositRanges;
+        const index = ranges.findIndex((range) => range.min <= deposit && deposit <= range.max);
+        return index;
+    }
+    updateInterest() {
+        const planIndex = this.getInterestIndex();
+        const rates = this.current.plan.interestRates;
+        this.current.interest = rates[planIndex].rate;
+
+        const formPercent = this.dom.formPercent;
+        const interestValue = this.current.interest + '%';
+        formPercent.textContent = interestValue;
+    }
+
+    updateResults() {
         // Result form
         const resultFromDate = this.dom.resultFromDate;
         resultFromDate.textContent = this.getDate();
@@ -299,12 +387,11 @@ class Calculator {
 
         const resultInterest = this.dom.resultInterest;
         resultInterest.textContent = '2000';
+
+        console.log('results');
     }
 
     save() {
         console.log('save');
     }
-
-
-
 }
