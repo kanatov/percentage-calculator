@@ -29,8 +29,8 @@ class Calculator {
         return Math.min(Math.max(min, value), max);
     }
 
-    setCurrentPeriod(preiod) {
-        this.current.preiod = preiod;
+    setCurrentPeriod(period) {
+        this.current.period = parseInt(period);
     }
 
     setCurrentInterest(interest) {
@@ -139,6 +139,12 @@ class Calculator {
         const template = this.dom[templateName].content.cloneNode(true);
         const node = template.childNodes[1];
         return node;
+    }
+    getInterestIndex() {
+        const deposit = this.current.deposit;
+        const ranges = this.current.depositRanges;
+        const index = ranges.findIndex((range) => range.min <= deposit && deposit <= range.max);
+        return index;
     }
 
     getDate(months = 0) {
@@ -257,7 +263,7 @@ class Calculator {
 
             if (Object.hasOwn(rate, 'period')) {
                 const period = rate.period;
-                const id = 'preiod' + period;
+                const id = i;
 
                 //Radiogroup template and values
                 const newPeriod = this.getTemplate('periodGroupElement');
@@ -358,17 +364,16 @@ class Calculator {
         formDepositMax.textContent = maxDeposit;
     }
 
-    getInterestIndex() {
-        const deposit = this.current.deposit;
-        const ranges = this.current.depositRanges;
-        const index = ranges.findIndex((range) => range.min <= deposit && deposit <= range.max);
-        return index;
-    }
     updateInterest() {
         const planIndex = this.getInterestIndex();
-        const rates = this.current.plan.interestRates;
-        this.current.interest = rates[planIndex].rate;
+        const periodIndex = this.current.period;
 
+        // get bigger index
+        const index = Math.max(planIndex, periodIndex);
+        const rates = this.current.plan.interestRates;
+        this.current.interest = rates[index].rate;
+
+        // Assigning rate
         const formPercent = this.dom.formPercent;
         const interestValue = this.current.interest + '%';
         formPercent.textContent = interestValue;
