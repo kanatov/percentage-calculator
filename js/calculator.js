@@ -14,7 +14,6 @@ class Calculator {
         this.current.plan = this.plans[planIndex];
     }
 
-
     setCurrentDeposit(deposit) {
         const minDeposit = this.current.plan.interestRates[0].minDeposit;
         const maxDeposit = this.current.plan.maxDeposit;
@@ -148,9 +147,18 @@ class Calculator {
     }
 
     getDate(months = 0) {
-        // upcoming month calculation here
+        let date = new Date();
 
-        const date = new Date();
+        if (months) {
+            let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            newDate.setMonth(date.getMonth() + months);
+
+            if (date.getDate() != newDate.getDate())
+                newDate.setDate(0);
+
+            date = newDate;
+        }
+
         let dateValue = '';
         dateValue += date.getDate();
         dateValue += ' ';
@@ -332,7 +340,7 @@ class Calculator {
                 this.updateInterest();
                 break;
             case 'save':
-                console.log('save');
+                this.save();
                 break;
         }
         this.updateResults();
@@ -380,20 +388,20 @@ class Calculator {
     }
 
     updateResults() {
-        // Result form
+        // Result date
         const resultFromDate = this.dom.resultFromDate;
         resultFromDate.textContent = this.getDate();
 
+        const periodIndex = this.current.period;
+        const periodMonths = this.current.plan.interestRates[periodIndex].period;
         const resultToDate = this.dom.resultToDate;
-        resultToDate.textContent = this.getDate();
+        resultToDate.textContent = this.getDate(periodMonths);
 
         const resultSavings = this.dom.resultSavings;
         resultSavings.textContent = '1000';
 
         const resultInterest = this.dom.resultInterest;
         resultInterest.textContent = '2000';
-
-        console.log('results');
     }
 
     save() {
