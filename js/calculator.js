@@ -60,79 +60,6 @@ class Calculator {
         this.arr.splice(n, 1);
         this.init();
     }
-     
-    // Калькулятор процентов, дней, месяцев
-    calc(s, d) {
-        var calc = {},
-        c = new Date(d),
-        t = new Date(),
-        todayD = t.getDate(),
-        todayM = t.getMonth(),
-        todayY = t.getFullYear(),
-        todayDays = md(todayY, todayM),
-        nextDays = md(todayY, todayM + 1),
-        contD = c.getDate(),
-        contM = c.getMonth(),
-        contY = c.getFullYear(),
-        m,
-        d = 0;
-        
-        // Дней в месяце
-        function md(y, m) {
-            var d = new Date(y, m + 1, 0)
-            return d.getDate();
-        }
-     
-        // Разница в месяцах
-        m = (todayY - contY) * 12;
-        m -= contM;
-        m += todayM;
-        
-        // Разница в днях
-        if (m) {
-            //месяц случился, была ли выплата?
-            if (contD > todayD) {
-                // дата контракта больше чем дата сегодня
-                if (todayD < todayDays) {
-                    // сегодня не последний день месяца
-                    m--;
-                    d = (todayDays - todayD);
-                    d += contD > nextDays ? nextDays : contD;
-                } else {
-                    // сегодня последний день месяца
-                    d = contD > nextDays ? nextDays : contD;
-                }
-            } else {
-                // дата контракта меньше или равна сегодняшней дате
-                // значит выплата была
-                d = (todayDays - todayD);
-                d += contD > nextDays ? nextDays : contD;
-            }
-        } else {
-            if (contD > todayD) {
-                d = contD - todayD;
-            } else {
-                d = (todayDays - todayD);
-                d += contD > nextDays ? nextDays : contD;
-            }
-        }
-        
-        // Считаем проценты
-        function p(s, m) {
-            var i;
-            for (i = 0; i < m; i++) {
-                s += (s * parseFloat(percent.value)) / 100;
-            }
-            return +s.toFixed(2);
-        }
-        
-        calc.m = m;
-        calc.s = p(s, m);
-        calc.sn = p(s, m + 1);
-        calc.d = d;
-        
-        return calc;
-    }
     */
     getTemplate(templateName) {
         const template = this.dom[templateName].content.cloneNode(true);
@@ -169,10 +96,21 @@ class Calculator {
         return dateValue;
     }
 
+    getSavings() {
+        let savings = this.current.deposit;
+        const periodIndex = this.current.period;
+        const periodMonths = this.current.plan.interestRates[periodIndex].period;
+
+        for (let i = 0; i < periodMonths; i++)
+            savings += savings * (this.current.interest / 100);
+        savings = savings.toFixed(2);
+
+        return savings;
+    }
+
     sanitizeNodes(parent) {
-        while (parent.firstChild) {
+        while (parent.firstChild)
             parent.removeChild(parent.firstChild);
-        }
     }
 
     initDepositRanges() {
@@ -187,9 +125,8 @@ class Calculator {
             const min = currentRates[i].minDeposit;
             let max;
 
-            if (typeof currentRates[i + 1] !== 'undefined') {
+            if (typeof currentRates[i + 1] !== 'undefined')
                 max = currentRates[i + 1].minDeposit - 1;
-            }
             const range = {
                 min: min,
                 max: max
@@ -233,9 +170,8 @@ class Calculator {
             newPlanGroupElementInput.id = planName;
             newPlanGroupElementInput.value = i;
 
-            if (i === 0) {
+            if (i === 0)
                 newPlanGroupElementInput.checked = true;
-            }
 
             //Event listener
             newPlanGroupElementInput.addEventListener('change', (e) => {
@@ -283,9 +219,8 @@ class Calculator {
                 const newPeriodInput = newPeriod.childNodes[1];
                 newPeriodInput.id = id;
                 newPeriodInput.value = id;
-                if (i === 0) {
+                if (i === 0)
                     newPeriodInput.checked = true;
-                }
 
                 //Event listener
                 newPeriodInput.addEventListener('change', (e) => {
@@ -388,7 +323,6 @@ class Calculator {
     }
 
     updateResults() {
-        // Result date
         const resultFromDate = this.dom.resultFromDate;
         resultFromDate.textContent = this.getDate();
 
@@ -398,10 +332,11 @@ class Calculator {
         resultToDate.textContent = this.getDate(periodMonths);
 
         const resultSavings = this.dom.resultSavings;
-        resultSavings.textContent = '1000';
+        resultSavings.textContent = this.getSavings();
 
         const resultInterest = this.dom.resultInterest;
-        resultInterest.textContent = '2000';
+        const interest = (this.getSavings() - this.current.deposit).toFixed(2);
+        resultInterest.textContent = interest;
     }
 
     save() {
