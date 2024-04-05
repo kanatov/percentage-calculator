@@ -291,7 +291,7 @@ input[type="radio"] {
 .radio-group label:has(input:checked) {
     /* background-color: #cbd4d9; */
     cursor: default;
-    box-shadow: inset 0 0 0 .08rem #545e66, inset 0 0 0 .2rem white;
+    box-shadow: inset 0 0 0 2px #545e66, inset 0 0 0 4px white;
     /* border: .1rem solid white; */
 }
 
@@ -314,7 +314,7 @@ input[type="radio"] {
 }
 
 #planPro:has(input:checked) {
-    box-shadow: inset 0 0 0 .08rem #0092eb, inset 0 0 0 .15rem white;
+    box-shadow: inset 0 0 0 2px #0092eb, inset 0 0 0 4px white;
 }
 
 #planPremium,
@@ -328,7 +328,7 @@ input[type="radio"] {
 }
 
 #planPremium:has(input:checked) {
-    box-shadow: inset 0 0 0 .08rem #111921, inset 0 0 0 .15rem white;
+    box-shadow: inset 0 0 0 2px #111921, inset 0 0 0 4px white;
 }
 
 #formDepositRangeRow {
