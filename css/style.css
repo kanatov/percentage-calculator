@@ -432,7 +432,7 @@ input[type="radio"] {
 }
 
 #savedResults .value.savings,
-#savedResults .value.interest {
+#savedResults .value.savings-interest {
     font-weight: 600;
 }
 
