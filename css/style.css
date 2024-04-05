@@ -200,15 +200,20 @@ a {
     Form
 */
 
+#form,
+#savedResults li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: .3rem;
+}
+
+
 #form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     gap: 2rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: white;
-    border-radius: .3rem;
 }
 
 #form fieldset {
@@ -334,9 +339,11 @@ input[type="radio"] {
 }
 
 #formDepositMin,
-#formDepositMax {
+#formDepositMax,
+#savedResults .label {
     font-size: .8rem;
     color: #667079;
+    display: block;
 }
 
 #formDepositMax {
@@ -379,7 +386,6 @@ input[type="radio"] {
     background: linear-gradient(0deg, #ffbc33 0%, #ffcc66 100%);
     border: 0;
     border-radius: 2rem;
-
 }
 
 #saveResult:hover {
@@ -390,37 +396,62 @@ input[type="radio"] {
     Saved results
 */
 
-/* #list {
-    display: block;
-    text-align: left;
-} */
+#savedResults li {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    padding-left: 1.5rem;
+}
 
-/* #list li {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: white;
-    border-radius: .3rem;
-    position: relative;
-} */
+#savedResults .group.period {
+    grid-column: span 2;
+}
+
+#savedResults .group span {
+    display: block;
+    width: 100%;
+}
+
+#savedResults .group:last-child {
+    text-align: right;
+}
+
+#savedResults .label {
+    line-height: 1rem;
+    margin-top: 1rem;
+}
+
+#savedResults .label:first-child {
+    margin-top: 0;
+}
+
+#savedResults .value {
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+#savedResults .value.savings,
+#savedResults .value.interest {
+    font-weight: 600;
+}
 
 .del {
     width: 2rem;
     height: 2rem;
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-
+    display: inline-block;
     line-height: 2rem;
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
-    color: #bc7070;
+    color: #2a2f33;
+    background-color: #F4F1F1;
     border-radius: .3rem;
 }
 
 .del:hover {
-    color: #6c3939;
-    background-color: #f8ecec;
+    background-color: #FAF6F6;
+    color: #8F3D3D;
 }
 
 #templates {
