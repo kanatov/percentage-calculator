@@ -4,15 +4,16 @@ class Calculator {
     constructor(domElements, plans) {
         this.dom = domElements;
         this.plans = plans;
-        this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         this.prefix = "calc-";
+        this.monthsSuffix = "mo";
         this.current = {};
         this.getUid = (() => {
             let uid = 0;
             return () => { return uid++; };
         })();
 
-        this.event('init');
+        this.event("init");
     }
 
     setCurrentPlan(planIndex) {
@@ -41,31 +42,6 @@ class Calculator {
         this.current.interest = interest;
     }
 
-    /*
-    // Добавляем элемент в массив
-    add() {
-        if (+this.dom.summ.value > 0) {
-            var newDate = new Date(this.dom.date.datepicker('getDate'));
-            this.arr.push({ 'summ': +this.dom.summ.value, 'date': newDate });
-            
-            this.arr.sort(function (a, b) {
-                return b.date - a.date;
-            });
-            
-            this.dom.summ.value = '1500';
-            
-            this.init();
-        } else {
-            this.notify(1);
-        }
-    }
-     
-    // Удаляем элемент из массива
-    remove(n) {
-        this.arr.splice(n, 1);
-        this.init();
-    }
-    */
     getTemplate(templateName) {
         const template = this.dom[templateName].content.cloneNode(true);
         const node = template.childNodes[1];
@@ -91,11 +67,11 @@ class Calculator {
             date = newDate;
         }
 
-        let dateValue = '';
+        let dateValue = "";
         dateValue += date.getDate();
-        dateValue += ' ';
+        dateValue += " ";
         dateValue += this.monthNames[date.getMonth()];
-        dateValue += ' ';
+        dateValue += " ";
         dateValue += date.getFullYear();
 
         return dateValue;
@@ -130,7 +106,7 @@ class Calculator {
             const min = currentRates[i].minDeposit;
             let max;
 
-            if (typeof currentRates[i + 1] !== 'undefined')
+            if (typeof currentRates[i + 1] !== "undefined")
                 max = currentRates[i + 1].minDeposit - 1;
             const range = {
                 min: min,
@@ -152,18 +128,18 @@ class Calculator {
             const category = this.plans[i].category;
 
             //Radiogroup template and values
-            const newPlanGroupElement = this.getTemplate('planGroupElement');
+            const newPlanGroupElement = this.getTemplate("planGroupElement");
             switch (category) {
                 case 1:
-                    newPlanGroupElement.id = 'planPro';
+                    newPlanGroupElement.id = "planPro";
                     break;
 
                 case 2:
-                    newPlanGroupElement.id = 'planPremium';
+                    newPlanGroupElement.id = "planPremium";
                     break;
 
                 default:
-                    newPlanGroupElement.id = 'planBasic';
+                    newPlanGroupElement.id = "planBasic";
             }
 
             newPlanGroupElement.htmlFor = planName;
@@ -179,9 +155,9 @@ class Calculator {
                 newPlanGroupElementInput.checked = true;
 
             //Event listener
-            newPlanGroupElementInput.addEventListener('change', (e) => {
+            newPlanGroupElementInput.addEventListener("change", (e) => {
                 const value = e.target.value;
-                this.event('plans', value);
+                this.event("plans", value);
             });
 
             this.dom.planGroup.appendChild(newPlanGroupElement);
@@ -190,15 +166,15 @@ class Calculator {
 
     initDeposit() {
         const formDeposit = this.dom.formDeposit;
-        formDeposit.addEventListener('change', (e) => {
+        formDeposit.addEventListener("change", (e) => {
             const value = e.target.value;
-            this.event('deposit input', value);
+            this.event("deposit input", value);
         });
 
         const formDepositRange = this.dom.formDepositRange;
-        formDepositRange.addEventListener('input', (e) => {
+        formDepositRange.addEventListener("input", (e) => {
             const value = e.target.value;
-            this.event('deposit range', value);
+            this.event("deposit range", value);
         });
     }
 
@@ -210,16 +186,16 @@ class Calculator {
         for (let i = 0; i < numberOfRates; i++) {
             const rate = this.current.plan.interestRates[i];
 
-            if (Object.hasOwn(rate, 'period')) {
+            if (Object.hasOwn(rate, "period")) {
                 const period = rate.period;
                 const id = i;
 
                 //Radiogroup template and values
-                const newPeriod = this.getTemplate('periodGroupElement');
+                const newPeriod = this.getTemplate("periodGroupElement");
                 newPeriod.htmlFor = id;
 
                 const newPeriodText = newPeriod.childNodes[0];
-                newPeriodText.textContent = period + 'mo';
+                newPeriodText.textContent = period + this.monthsSuffix;
 
                 const newPeriodInput = newPeriod.childNodes[1];
                 newPeriodInput.id = id;
@@ -228,9 +204,9 @@ class Calculator {
                     newPeriodInput.checked = true;
 
                 //Event listener
-                newPeriodInput.addEventListener('change', (e) => {
+                newPeriodInput.addEventListener("change", (e) => {
                     const value = e.target.value;
-                    this.event('period', value);
+                    this.event("period", value);
                 });
 
                 this.dom.periodGroup.appendChild(newPeriod);
@@ -240,8 +216,8 @@ class Calculator {
 
     initSave() {
         const form = this.dom.form;
-        form.addEventListener('submit', (e) => {
-            this.event('save');
+        form.addEventListener("submit", (e) => {
+            this.event("save");
             e.preventDefault();
         });
     }
@@ -283,7 +259,7 @@ class Calculator {
 
         // Assigning rate
         const formPercent = this.dom.formPercent;
-        const interestValue = this.current.interest + '%';
+        const interestValue = this.current.interest + "%";
         formPercent.textContent = interestValue;
     }
 
@@ -305,18 +281,40 @@ class Calculator {
     }
 
     save() {
-        const newSave = this.getTemplate('savedResultElement');
+        const newSave = this.getTemplate("savedResultElement");
         const id = this.prefix + this.getUid();
         newSave.id = id;
 
+        const deposit = newSave.getElementsByClassName("deposit")[0];
+        deposit.textContent = this.current.deposit;
+
+        const plan = newSave.getElementsByClassName("plan")[0];
+        plan.textContent = this.current.plan.name;
+
+        const interest = newSave.getElementsByClassName("interest")[0];
+        interest.textContent = this.current.interest + "%";
+
+        const preiod = newSave.getElementsByClassName("preiod")[0];
+        const rate = this.current.plan.interestRates[this.current.period];
+        preiod.textContent = rate.period + this.monthsSuffix;
+
+        const resultToDate = newSave.getElementsByClassName("period-to")[0];
+        resultToDate.textContent = this.getDate(rate.period);
+
+        const savings = newSave.getElementsByClassName("savings")[0];
+        savings.textContent = this.getSavings();
+
+        const savingsInterest = newSave.getElementsByClassName("savings-interest")[0];
+        savingsInterest.textContent = (this.getSavings() - this.current.deposit).toFixed(2);
+
         //Event listener
         const newSaveClose = newSave.getElementsByClassName("delete")[0];
-        newSaveClose.addEventListener('click', (e) => {
+        newSaveClose.addEventListener("click", (e) => {
             e.preventDefault();
-            this.event('delete', id);
+            this.event("delete", id);
         });
 
-        this.dom.savedResults.appendChild(newSave);
+        this.dom.savedResults.insertBefore(newSave, this.dom.savedResults.firstChild);
     }
 
     delete(id) {
@@ -326,14 +324,14 @@ class Calculator {
 
     event(event, value) {
         switch (event) {
-            case 'init':
+            case "init":
                 this.initPlans();
                 this.initDeposit();
                 this.initSave();
-                this.event('plans', 0);
+                this.event("plans", 0);
                 this.updateResults();
                 break;
-            case 'plans':
+            case "plans":
                 this.setCurrentPlan(value);
                 this.setCurrentDeposit();
                 this.initDepositRanges();
@@ -345,27 +343,27 @@ class Calculator {
                 this.updateInterest();
                 this.updateResults();
                 break;
-            case 'deposit input':
+            case "deposit input":
                 this.setCurrentDeposit(value);
                 this.updateDepositRange();
                 this.updateInterest();
                 this.updateResults();
                 break;
-            case 'deposit range':
+            case "deposit range":
                 this.setCurrentDeposit(value);
                 this.updateDepositInput();
                 this.updateInterest();
                 this.updateResults();
                 break;
-            case 'period':
+            case "period":
                 this.setCurrentPeriod(value);
                 this.updateInterest();
                 this.updateResults();
                 break;
-            case 'save':
+            case "save":
                 this.save();
                 break;
-            case 'delete':
+            case "delete":
                 this.delete(value);
                 break;
         }
