@@ -30,7 +30,6 @@
 				Calculate your deposit's maturity amount with monthly cumulative payouts
 			</p>
 		</header>
-		<!-- <a class="del button" href="#" onClick="calc.remove(' + i + ')">×</a> -->
 		<form id="form">
 			<fieldset id="formInput">
 				<div id="formPlanGroup" class="col-double row-full">
@@ -53,11 +52,11 @@
 				<span id="formPercent" class="input row-medium"></span>
 			</fieldset>
 			<fieldset id="formResult">
-				<label class="label">From</label>
+				<label class="label">Starts</label>
 				<span class="input row-long">
 					<span id="resultFromDate" class="value"></span>
 				</span>
-				<label class="label">To</label>
+				<label class="label">Ends</label>
 				<span class="input row-long">
 					<aspan id="resultToDate" class="value"></aspan>
 				</span>
@@ -71,9 +70,6 @@
 			</fieldset>
 		</form>
 		<ul id="savedResults">
-			<li>
-
-			</li>
 		</ul>
 	</main>
 	<footer>
@@ -108,6 +104,35 @@
 			<label class="button">
 				<input type="radio" name="period" />
 			</label>
+		</template>
+		<template id="savedResultElement">
+			<li>
+				<div class="group">
+					<span class="label">Deposit</span>
+					<span class="value deposit">450000</span>
+				</div>
+				<div class="group">
+					<span class="label">Plan</span>
+					<span class="value plan">Premium</span>
+					<span class="label">Rate</span>
+					<span class="value percent">3%</span>
+				</div>
+				<div class="group period">
+					<span class="label">Period</span>
+					<span class="value preiod">4mo</span>
+					<span class="label">Ends</span>
+					<span class="value period-to">10 September 2024</span>
+				</div>
+				<div class="group">
+					<span class="label">Total savings</span>
+					<span class="value savings">267800</span>
+					<span class="label">Interest</span>
+					<span class="value interest">1780</span>
+				</div>
+				<div class="group">
+					<a class="del button" href="#">×</a>
+				</div>
+			</li>
 		</template>
 	</div>
 
@@ -145,6 +170,7 @@
 		// Templates
 		domElements.planGroupElement = document.getElementById('planGroupElement');
 		domElements.periodGroupElement = document.getElementById('periodGroupElement');
+		domElements.savedResultElement = document.getElementById('savedResultElement');
 
 
 		// Plans configuration
