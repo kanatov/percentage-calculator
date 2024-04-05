@@ -69,8 +69,7 @@
 				</div>
 			</fieldset>
 		</form>
-		<ul id="savedResults">
-		</ul>
+		<ul id="savedResults"></ul>
 	</main>
 	<footer>
 		<div id="footerWrap">
@@ -130,7 +129,7 @@
 					<span class="value interest">1780</span>
 				</div>
 				<div class="group">
-					<a class="del button" href="#">×</a>
+					<a class="delete button" href="#">×</a>
 				</div>
 			</li>
 		</template>
@@ -166,6 +165,8 @@
 
 		// Save result button
 		domElements.form = document.getElementById('form');
+		domElements.savedResults = document.getElementById('savedResults');
+
 
 		// Templates
 		domElements.planGroupElement = document.getElementById('planGroupElement');

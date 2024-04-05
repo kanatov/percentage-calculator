@@ -5,7 +5,12 @@ class Calculator {
         this.dom = domElements;
         this.plans = plans;
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        this.prefix = "calc-";
         this.current = {};
+        this.getUid = (() => {
+            let uid = 0;
+            return () => { return uid++; };
+        })();
 
         this.event('init');
     }
@@ -241,46 +246,6 @@ class Calculator {
         });
     }
 
-    event(event, value) {
-        switch (event) {
-            case 'init':
-                this.initPlans();
-                this.initDeposit();
-                this.initSave();
-                this.event('plans', 0);
-                break;
-            case 'plans':
-                this.setCurrentPlan(value);
-                this.setCurrentDeposit();
-                this.initDepositRanges();
-                this.setCurrentPeriod(0);
-                this.updateDepositInput();
-                this.updateDepositRange();
-                this.updateDepositMinMax();
-                this.initPeriods();
-                this.updateInterest();
-                break;
-            case 'deposit input':
-                this.setCurrentDeposit(value);
-                this.updateDepositRange();
-                this.updateInterest();
-                break;
-            case 'deposit range':
-                this.setCurrentDeposit(value);
-                this.updateDepositInput();
-                this.updateInterest();
-                break;
-            case 'period':
-                this.setCurrentPeriod(value);
-                this.updateInterest();
-                break;
-            case 'save':
-                this.save();
-                break;
-        }
-        this.updateResults();
-    }
-
     updateDepositInput() {
         const formDeposit = this.dom.formDeposit;
         formDeposit.value = this.current.deposit;
@@ -340,6 +305,69 @@ class Calculator {
     }
 
     save() {
-        console.log('save');
+        const newSave = this.getTemplate('savedResultElement');
+        const id = this.prefix + this.getUid();
+        newSave.id = id;
+
+        //Event listener
+        const newSaveClose = newSave.getElementsByClassName("delete")[0];
+        newSaveClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.event('delete', id);
+        });
+
+        this.dom.savedResults.appendChild(newSave);
+    }
+
+    delete(id) {
+        const elem = document.getElementById(id);
+        this.dom.savedResults.removeChild(elem);
+    }
+
+    event(event, value) {
+        switch (event) {
+            case 'init':
+                this.initPlans();
+                this.initDeposit();
+                this.initSave();
+                this.event('plans', 0);
+                this.updateResults();
+                break;
+            case 'plans':
+                this.setCurrentPlan(value);
+                this.setCurrentDeposit();
+                this.initDepositRanges();
+                this.setCurrentPeriod(0);
+                this.updateDepositInput();
+                this.updateDepositRange();
+                this.updateDepositMinMax();
+                this.initPeriods();
+                this.updateInterest();
+                this.updateResults();
+                break;
+            case 'deposit input':
+                this.setCurrentDeposit(value);
+                this.updateDepositRange();
+                this.updateInterest();
+                this.updateResults();
+                break;
+            case 'deposit range':
+                this.setCurrentDeposit(value);
+                this.updateDepositInput();
+                this.updateInterest();
+                this.updateResults();
+                break;
+            case 'period':
+                this.setCurrentPeriod(value);
+                this.updateInterest();
+                this.updateResults();
+                break;
+            case 'save':
+                this.save();
+                break;
+            case 'delete':
+                this.delete(value);
+                break;
+        }
     }
 }

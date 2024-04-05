@@ -436,7 +436,7 @@ input[type="radio"] {
     font-weight: 600;
 }
 
-.del {
+.delete {
     width: 2rem;
     height: 2rem;
     display: inline-block;
@@ -449,7 +449,7 @@ input[type="radio"] {
     border-radius: .3rem;
 }
 
-.del:hover {
+.delete:hover {
     background-color: #FAF6F6;
     color: #8F3D3D;
 }
