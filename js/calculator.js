@@ -23,23 +23,18 @@ class Calculator {
     setCurrentDeposit(deposit) {
         const minDeposit = this.current.plan.interestRates[0].minDeposit;
         const maxDeposit = this.current.plan.maxDeposit;
+        if (deposit)
+            deposit = parseInt(deposit.replace(/,/g, ''));
 
         let newDeposit = deposit || this.current.deposit || 0;
         newDeposit = this.clamp(newDeposit, minDeposit, maxDeposit);
 
         this.current.deposit = newDeposit;
-    }
 
-    clamp(value, min, max) {
-        return Math.min(Math.max(min, value), max);
     }
 
     setCurrentPeriod(period) {
         this.current.period = parseInt(period);
-    }
-
-    setCurrentInterest(interest) {
-        this.current.interest = interest;
     }
 
     getTemplate(templateName) {
@@ -84,14 +79,7 @@ class Calculator {
 
         for (let i = 0; i < periodMonths; i++)
             savings += savings * (this.current.interest / 100);
-        savings = savings.toFixed(2);
-
         return savings;
-    }
-
-    sanitizeNodes(parent) {
-        while (parent.firstChild)
-            parent.removeChild(parent.firstChild);
     }
 
     initDepositRanges() {
@@ -171,6 +159,11 @@ class Calculator {
             this.event("deposit input", value);
         });
 
+        formDeposit.addEventListener("input", (e) => {
+            const value = e.target.value;
+            this.event("deposit input", value);
+        });
+
         const formDepositRange = this.dom.formDepositRange;
         formDepositRange.addEventListener("input", (e) => {
             const value = e.target.value;
@@ -224,7 +217,7 @@ class Calculator {
 
     updateDepositInput() {
         const formDeposit = this.dom.formDeposit;
-        formDeposit.value = this.current.deposit;
+        formDeposit.value = this.formatNumber(this.current.deposit);
     }
 
     updateDepositRange() {
@@ -242,10 +235,10 @@ class Calculator {
         const maxDeposit = this.current.plan.maxDeposit;
 
         const formDepositMin = this.dom.formDepositMin;
-        formDepositMin.textContent = minDeposit;
+        formDepositMin.textContent = this.formatNumber(minDeposit);
 
         const formDepositMax = this.dom.formDepositMax;
-        formDepositMax.textContent = maxDeposit;
+        formDepositMax.textContent = this.formatNumber(maxDeposit);
     }
 
     updateInterest() {
@@ -273,10 +266,11 @@ class Calculator {
         resultToDate.textContent = this.getDate(periodMonths);
 
         const resultSavings = this.dom.resultSavings;
-        resultSavings.textContent = this.getSavings();
+        resultSavings.textContent = this.formatNumberFixed(this.getSavings());
 
         const resultInterest = this.dom.resultInterest;
-        const interest = (this.getSavings() - this.current.deposit).toFixed(2);
+        const interestRaw = this.getSavings() - this.current.deposit;
+        const interest = this.formatNumberFixed(interestRaw);
         resultInterest.textContent = interest;
     }
 
@@ -286,7 +280,7 @@ class Calculator {
         newSave.id = id;
 
         const deposit = newSave.getElementsByClassName("deposit")[0];
-        deposit.textContent = this.current.deposit;
+        deposit.textContent = this.formatNumber(this.current.deposit);
 
         const plan = newSave.getElementsByClassName("plan")[0];
         plan.textContent = this.current.plan.name;
@@ -302,10 +296,11 @@ class Calculator {
         resultToDate.textContent = this.getDate(rate.period);
 
         const savings = newSave.getElementsByClassName("savings")[0];
-        savings.textContent = this.getSavings();
+        savings.textContent = this.formatNumberFixed(this.getSavings());
 
         const savingsInterest = newSave.getElementsByClassName("savings-interest")[0];
-        savingsInterest.textContent = (this.getSavings() - this.current.deposit).toFixed(2);
+        const savingsInterestRaw = this.getSavings() - this.current.deposit;
+        savingsInterest.textContent = this.formatNumberFixed(savingsInterestRaw);
 
         //Event listener
         const newSaveClose = newSave.getElementsByClassName("delete")[0];
@@ -320,6 +315,26 @@ class Calculator {
     delete(id) {
         const elem = document.getElementById(id);
         this.dom.savedResults.removeChild(elem);
+    }
+
+    clamp(value, min, max) {
+        return Math.min(Math.max(min, value), max);
+    }
+
+    sanitizeNodes(parent) {
+        while (parent.firstChild)
+            parent.removeChild(parent.firstChild);
+    }
+
+    formatNumber(number) {
+        return number.toLocaleString();
+    }
+
+    formatNumberFixed(number) {
+        return number.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
     }
 
     event(event, value) {
@@ -345,6 +360,7 @@ class Calculator {
                 break;
             case "deposit input":
                 this.setCurrentDeposit(value);
+                this.updateDepositInput();
                 this.updateDepositRange();
                 this.updateInterest();
                 this.updateResults();
