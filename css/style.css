@@ -32,7 +32,6 @@ button {
 
 html {
     font-size: 14pt;
-    /* font-family: 'Barlow', Verdana, sans-serif; */
     font-family: 'Rubik', Verdana, sans-serif;
     font-weight: 400;
     color: #2a2f33;
@@ -106,6 +105,10 @@ main,
 
 }
 
+#mobileNav {
+    display: none;
+}
+
 /*  __________
     Footer
 */
@@ -144,6 +147,10 @@ hr {
 #footerNav {
     margin-bottom: 1rem;
     font-weight: 600;
+}
+
+#footerNav li {
+    display: inline-block;
 }
 
 footer hr {
@@ -214,6 +221,7 @@ a {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     gap: 2rem;
+    line-height: 2rem;
 }
 
 #form fieldset {
@@ -243,10 +251,6 @@ a {
 #formInput {
     padding: 1rem 0;
     padding-left: .5rem;
-}
-
-#form {
-    line-height: 2rem;
 }
 
 label.label {

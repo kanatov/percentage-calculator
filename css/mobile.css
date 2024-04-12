@@ -1,0 +1,80 @@
+html {
+    font-size: 11pt;
+}
+
+header,
+main,
+#footerWrap {
+    margin: 0 auto;
+    width: 100%;
+}
+
+main {
+    margin: 0 1rem;
+    box-sizing: content-box;
+    width: auto;
+}
+
+#topbar {
+    padding-top: 1.25rem;
+    display: block;
+    text-align: center;
+}
+
+#logoWrap {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+#headerNav {
+    display: none;
+}
+
+#mobileNav {
+    display: block;
+}
+
+
+h1 {
+    font-size: 2rem;
+}
+
+#tagline {
+    width: 100%;
+}
+
+#form {
+    display: block;
+    /* line-height: 1.8rem; */
+}
+
+#form #formInput {
+    grid-template-rows: repeat(6, 1.6rem);
+}
+
+#form #formResult {
+    grid-template-rows: repeat(5, 1.6rem);
+}
+
+#footerWrap {
+    width: 100%;
+}
+
+#footerNav {
+    margin-bottom: 1.5rem;
+}
+
+#footerNav li {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+#logoWrapFooter {
+    float: none;
+    margin-bottom: 1rem;
+}
+
+#saveResult {
+    height: 2rem;
+}

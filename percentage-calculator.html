@@ -4,15 +4,25 @@
 <head>
 	<title>Fixed deposit calculator</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
 	<script src="./js/calculator.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/mobile.css" media="only screen and (max-device-width: 480px)" type="text/css" />
+	<link rel="stylesheet" href="css/mobile.css" media="handheld" type="text/css" />
+
 </head>
 
 <body>
 	<header id="topbar">
+		<div id="mobileNav">
+			<li class="selected"><span>Calculator</span></li>
+			<li><a href="#">Plans</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">About</a></li>
+		</div>
 		<div id="logoWrap">
 			<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
 		</div>
@@ -79,7 +89,7 @@
 				<li><a href="#">Cookie Policy</a></li>
 				<li><a href="#">Contact us</a></li>
 			</ul>
-			<section id="footerLinks">
+			<section>
 				<div id="logoWrapFooter">
 					<a href="#"><img id="logoCI" src="./img/CI_Financial_Logo.svg" alt="CI Financial Logo" /></a>
 				</div>
