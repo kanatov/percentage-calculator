@@ -10,17 +10,15 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
-	<!-- <link rel="stylesheet" href="css/mobile.css" media="only screen and (max-device-width: 480px)" type="text/css" /> -->
-	<!-- <link rel="stylesheet" href="css/mobile.css" media="handheld" type="text/css" /> -->
+	<link rel="stylesheet" href="css/mobile.css" media="only screen and (max-device-width: 480px)" type="text/css" />
+	<link rel="stylesheet" href="css/mobile.css" media="handheld" type="text/css" />
 
 </head>
 
 <body>
 	<header id="topbar">
 		<div id="mobileSidebar">
-			<div id="mobileNavButton">
-				<a href="#" id="mobileNavButton"><img id="menuClose" src="./img/close.svg" alt="menu" /><img id="menuHamburger" src="./img/menu.svg" alt="menu" /></a>
-			</div>
+			<div id="mobileNavButton"><a href="#" id="mobileNavButton"><img id="menuClose" src="./img/close.svg" alt="menu" /><img id="menuHamburger" src="./img/menu.svg" alt="menu" /></a></div>
 			<div id="mobileNav">
 				<li class="selected"><span>Calculator</span></li>
 				<li><a href="#">Plans</a></li>
@@ -29,8 +27,7 @@
 			</div>
 		</div>
 		<div id="headerNavWrap">
-			<div id="logoWrap">
-				<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
+			<div id="logoWrap"><a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
 			</div>
 			<ul id="headerNav">
 				<li class="selected"><span>Calculator</span></li>
@@ -51,15 +48,17 @@
 			<fieldset id="formInput">
 				<div id="formPlanGroup" class="col-double row-full">
 					<label class="label">Plan</label>
-					<div id="planGroup" class="radio-group row-long"></div>
+					<div id="planGroup" class="radio-group row-medium"></div>
 				</div>
 
 				<div id="formDepositRangeRow" class="col-double row-full">
 					<label class="label">Initial deposit</label>
 					<input id="formDeposit" class="input" type="text" value="" />
-					<input id="formDepositRange" type="range" min="" max="" value="" step="1000" />
-					<label id="formDepositMin"></label>
-					<label id="formDepositMax"></label>
+					<div id="formDepositSliderRow" class="row-medium">
+						<input id="formDepositRange" class="row-medium" type="range" min="" max="" value="" step="1000" />
+						<label id="formDepositMin"></label>
+						<label id="formDepositMax"></label>
+					</div>
 				</div>
 
 				<label class="label">Period</label>
@@ -123,7 +122,8 @@
 		</template>
 		<template id="savedResultElement">
 			<li>
-				<div class="group">
+				<a class="delete button" href="#">×</a>
+				<div class="group deposit-group">
 					<span class="label">Deposit</span>
 					<span class="value deposit"></span>
 				</div>
@@ -133,7 +133,7 @@
 					<span class="label">Rate</span>
 					<span class="value interest"></span>
 				</div>
-				<div class="group period">
+				<div class="group period-group">
 					<span class="label">Period</span>
 					<span class="value preiod"></span>
 					<span class="label">Ends</span>
@@ -144,9 +144,6 @@
 					<span class="value savings"></span>
 					<span class="label">Interest</span>
 					<span class="value savings-interest"></span>
-				</div>
-				<div class="group">
-					<a class="delete button" href="#">×</a>
 				</div>
 			</li>
 		</template>

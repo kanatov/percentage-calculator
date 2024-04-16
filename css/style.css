@@ -67,6 +67,7 @@ main,
     align-content: center;
     justify-content: left;
     position: fixed;
+    z-index: 1;
     width: 100%;
     background: white;
     box-shadow: 0 .1rem .25rem rgba(42, 47, 51, .2), 0 .5rem .5rem rgba(42, 47, 51, .1);
@@ -74,11 +75,14 @@ main,
 
 #logoWrap {
     width: 0;
-    display: flex;
-    align-content: center;
-    line-height: 0;
 }
 
+#logoWrap a {
+    width: min-content;
+    height: min-content;
+    line-height: 0;
+    display: block;
+}
 
 #logo {
     width: 6rem;
@@ -131,7 +135,7 @@ main,
 
 footer {
     background-color: #cbd4d9;
-    padding: 2rem 2rem 3rem;
+    padding: 2rem;
     color: #667079;
 }
 
@@ -238,14 +242,31 @@ a {
     grid-template-rows: 1fr;
     gap: 2rem;
     line-height: 2rem;
+    align-content: center;
+    justify-content: center;
 }
 
 #form fieldset {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(6, 2.2rem);
-    grid-row-gap: 1.5rem;
+    grid-row-gap: 1rem;
     grid-column-gap: .5rem;
+    justify-content: center;
+}
+
+#formInput {
+    padding: 1rem 0;
+    padding-left: .5rem;
+    grid-template-rows: repeat(6, 2.1rem);
+}
+
+#formDepositSliderRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 1fr);
+    line-height: 1.2rem;
+    align-content: center;
+    justify-content: center;
 }
 
 .row-long {
@@ -264,9 +285,8 @@ a {
     grid-row: span 2;
 }
 
-#formInput {
-    padding: 1rem 0;
-    padding-left: .5rem;
+.col-tripple {
+    grid-row: span 3;
 }
 
 label.label {
@@ -319,7 +339,9 @@ input[type="radio"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 0;
+    grid-row-gap: 1rem;
+    align-content: center;
+    justify-content: center;
 }
 
 
@@ -353,9 +375,10 @@ input[type="radio"] {
 
 #formDepositRangeRow {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 0;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-column-gap: .5rem;
+    grid-row-gap: 1rem;
 }
 
 #formDepositMin,
@@ -370,14 +393,11 @@ input[type="radio"] {
     text-align: right;
 }
 
-#formDepositRange {
-    grid-column: span 2;
-}
-
 #formResult {
     padding: 1rem;
     background-color: #f5eee0;
     border-radius: .2rem;
+    grid-template-rows: repeat(5, 2.1rem);
 }
 
 #formResult a:hover {
@@ -421,19 +441,18 @@ input[type="radio"] {
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
     padding-left: 1.5rem;
+    position: relative;
+    align-content: center;
+    justify-content: center;
 }
 
-#savedResults .group.period {
+#savedResults .group.period-group {
     grid-column: span 2;
 }
 
 #savedResults .group span {
     display: block;
     width: 100%;
-}
-
-#savedResults .group:last-child {
-    text-align: right;
 }
 
 #savedResults .label {
@@ -455,6 +474,13 @@ input[type="radio"] {
 #savedResults .value.savings-interest {
     font-weight: 600;
 }
+
+#savedResults .delete.button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
 
 .delete {
     width: 2rem;

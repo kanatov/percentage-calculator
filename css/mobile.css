@@ -3,34 +3,52 @@ html {
     font-size: 11pt;
 }
 
-header,
+#topbar,
 main,
-#footerWrap {
+#footerWrap,
+#headerNavWrap {
     margin: 0 auto;
     width: 100%;
 }
 
 main {
     margin: 0 1rem;
+    padding-top: 5rem;
     box-sizing: content-box;
     width: auto;
 }
 
 #topbar {
-    display: block;
-    text-align: center;
+    padding: .75rem;
 }
-
-#menuHamburger {}
 
 #menuClose {
     display: none;
 }
 
+#headerNavWrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 #logoWrap {
+    height: min-content;
     width: 100%;
     text-align: center;
-    display: block;
+}
+
+#logoWrap a {
+    display: inline;
+}
+
+#logoWrap a img {
+    vertical-align: text-top;
+}
+
+#logo {
+    width: 7rem;
 }
 
 #headerNav {
@@ -39,13 +57,17 @@ main {
 
 #mobileNavButton {
     width: 0;
+    line-height: 0;
 }
 
-#mobileNavButton a,
 #mobileNavButton img {
-    display: block;
     width: 1.5rem;
     height: 1.5rem;
+    vertical-align: middle;
+}
+
+#menuClose {
+    display: none;
 }
 
 #mobileNavButton img {
@@ -62,10 +84,10 @@ main {
 }
 
 #mobileSidebar {
-    background: rgba(0, 0, 0, 0.6);
-    width: 100%;
+    /* background: rgba(0, 0, 0, 0.6); */
+    width: 1px;
+    display: block;
 }
-
 
 h1 {
     font-size: 2rem;
@@ -77,15 +99,42 @@ h1 {
 
 #form {
     display: block;
-    /* line-height: 1.8rem; */
+    line-height: 2rem;
 }
 
 #form #formInput {
-    grid-template-rows: repeat(6, 1.6rem);
+    padding: 0;
+    margin-bottom: 1rem;
+    grid-template-rows: 1.5rem 3rem 1.5rem 1.5rem 1.5rem 1.5rem;
+    grid-row-gap: 1.5rem;
 }
 
 #form #formResult {
     grid-template-rows: repeat(5, 1.6rem);
+}
+
+#formDepositRangeRow {
+    grid-template-rows: repeat(3, 2rem);
+    row-gap: 1rem;
+}
+
+#savedResults li {
+    display: block;
+}
+
+#savedResults .group {
+    display: grid;
+    grid-template-columns: 6rem auto;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#savedResults .group.deposit-group {
+    grid-template-rows: 1fr;
+}
+
+#savedResults .label {
+    line-height: 2rem;
+    margin: 0;
 }
 
 #footerWrap {
