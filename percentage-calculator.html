@@ -10,28 +10,35 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
-	<link rel="stylesheet" href="css/mobile.css" media="only screen and (max-device-width: 480px)" type="text/css" />
-	<link rel="stylesheet" href="css/mobile.css" media="handheld" type="text/css" />
+	<!-- <link rel="stylesheet" href="css/mobile.css" media="only screen and (max-device-width: 480px)" type="text/css" /> -->
+	<!-- <link rel="stylesheet" href="css/mobile.css" media="handheld" type="text/css" /> -->
 
 </head>
 
 <body>
 	<header id="topbar">
-		<div id="mobileNav">
-			<li class="selected"><span>Calculator</span></li>
-			<li><a href="#">Plans</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">About</a></li>
+		<div id="mobileSidebar">
+			<div id="mobileNavButton">
+				<a href="#" id="mobileNavButton"><img id="menuClose" src="./img/close.svg" alt="menu" /><img id="menuHamburger" src="./img/menu.svg" alt="menu" /></a>
+			</div>
+			<div id="mobileNav">
+				<li class="selected"><span>Calculator</span></li>
+				<li><a href="#">Plans</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">About</a></li>
+			</div>
 		</div>
-		<div id="logoWrap">
-			<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
+		<div id="headerNavWrap">
+			<div id="logoWrap">
+				<a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
+			</div>
+			<ul id="headerNav">
+				<li class="selected"><span>Calculator</span></li>
+				<li><a href="#">Plans</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
 		</div>
-		<ul id="headerNav">
-			<li class="selected"><span>Calculator</span></li>
-			<li><a href="#">Plans</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">About</a></li>
-		</ul>
 	</header>
 	<main>
 		<header>

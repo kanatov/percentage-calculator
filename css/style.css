@@ -44,9 +44,10 @@ body {
     align-items: stretch;
 }
 
-header,
+#topbar,
 main,
-#footerWrap {
+#footerWrap,
+#headerNavWrap {
     margin: 0 auto;
     width: 40rem;
 }
@@ -55,26 +56,42 @@ main,
     Topbar
 */
 
+#mobileSidebar {
+    display: none;
+}
+
 #topbar {
-    height: 2.5rem;
-    padding-top: .75rem;
+    padding: 1rem;
+    box-sizing: border-box;
     display: flex;
-    align-items: center;
+    align-content: center;
     justify-content: left;
+    position: fixed;
+    width: 100%;
+    background: white;
+    box-shadow: 0 .1rem .25rem rgba(42, 47, 51, .2), 0 .5rem .5rem rgba(42, 47, 51, .1);
 }
 
 #logoWrap {
     width: 0;
     display: flex;
+    align-content: center;
+    line-height: 0;
 }
 
+
 #logo {
-    width: 6.5rem;
+    width: 6rem;
     filter: brightness(0) invert(15%) sepia(100%) hue-rotate(140deg) saturate(20%);
 }
 
 #logoWrap a:hover #logo {
     filter: brightness(0) invert(35%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+#headerNavWrap {
+    display: flex;
+    align-content: center;
 }
 
 #headerNav {
@@ -83,7 +100,6 @@ main,
     align-items: center;
     justify-content: center;
     gap: .5rem;
-    height: 5rem;
 }
 
 #headerNav li a,
@@ -95,12 +111,12 @@ main,
 }
 
 #headerNav li a:hover {
-    background-color: #d7e0e6;
+    background-color: #ebf0f4;
 }
 
 
 #topbar .selected span {
-    background-color: #cbd4d9;
+    background-color: #d7e0e6;
     cursor: default;
 
 }
@@ -172,7 +188,7 @@ footer hr {
 
 main {
     flex-grow: 1;
-    padding: 2rem 0;
+    padding-top: 5.5rem;
 }
 
 

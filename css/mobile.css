@@ -1,3 +1,4 @@
+/* MIN 320 */
 html {
     font-size: 11pt;
 }
@@ -16,9 +17,14 @@ main {
 }
 
 #topbar {
-    padding-top: 1.25rem;
     display: block;
     text-align: center;
+}
+
+#menuHamburger {}
+
+#menuClose {
+    display: none;
 }
 
 #logoWrap {
@@ -31,8 +37,33 @@ main {
     display: none;
 }
 
-#mobileNav {
+#mobileNavButton {
+    width: 0;
+}
+
+#mobileNavButton a,
+#mobileNavButton img {
     display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#mobileNavButton img {
+    filter: brightness(0) invert(19%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+#mobileNavButton a:hover img {
+    border: 1px solid red;
+    filter: brightness(0) invert(30%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+#mobileNav {
+    display: none;
+}
+
+#mobileSidebar {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
 }
 
 
