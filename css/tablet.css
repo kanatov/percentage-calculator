@@ -1,0 +1,132 @@
+#topbar,
+main,
+#footerWrap,
+#headerNavWrap {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main {
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    box-sizing: border-box;
+    padding-top: 5rem;
+}
+
+#topbar {
+    padding: .75rem;
+}
+
+#headerNavWrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#logoWrap {
+    height: min-content;
+    width: 100%;
+    text-align: center;
+}
+
+#logoWrap a {
+    display: inline;
+}
+
+#logoWrap a img {
+    vertical-align: text-top;
+}
+
+#logo {
+    width: 7rem;
+}
+
+#headerNav {
+    display: none;
+}
+
+#mobileNavButton {
+    width: 0;
+    line-height: 0;
+}
+
+#mobileNavButton img {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+}
+
+#mobileNavButton img {
+    filter: brightness(0) invert(19%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+#mobileNavButton a:hover img {
+    border: 1px solid red;
+    filter: brightness(0) invert(30%) sepia(100%) hue-rotate(140deg) saturate(20%);
+}
+
+#mobileNav {
+    display: none;
+}
+
+#mobileSidebar {
+    /* background: rgba(0, 0, 0, 0.6); */
+    width: 1px;
+    display: block;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+#tagline,
+#form,
+#savedResults {
+    width: 100%;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+#form {
+    display: block;
+    line-height: 2rem;
+}
+
+#form #formInput {
+    padding: 0;
+    margin-bottom: var(--gap);
+    grid-template-rows: 1.5rem 3rem 1.5rem 1.5rem 1.5rem 1.5rem;
+    grid-row-gap: 1.5rem;
+}
+
+#form #formResult {
+    grid-template-rows: repeat(5, 1.6rem);
+}
+
+#formDepositRangeRow {
+    grid-template-rows: repeat(3, 2rem);
+    row-gap: var(--gap);
+}
+
+#savedResults li {
+    display: block;
+}
+
+#savedResults .group {
+    display: grid;
+    grid-template-columns: 6rem auto;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#savedResults .group.deposit-group {
+    grid-template-rows: 1fr;
+}
+
+#savedResults .label {
+    line-height: 2rem;
+    margin: 0;
+}

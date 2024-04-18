@@ -2,6 +2,7 @@
     Reset
 */
 
+
 html,
 body {
     height: 100%;
@@ -19,6 +20,7 @@ p {
     padding: 0;
     margin: 0;
     border: none;
+    --gap: .8rem;
 }
 
 ul {
@@ -42,6 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    overflow-x: hidden;
 }
 
 #topbar,
@@ -108,7 +111,7 @@ main,
 
 #headerNav li a,
 #headerNav li span {
-    padding: .6rem 1rem;
+    padding: .6rem var(--gap);
     border-radius: 2rem;
     font-weight: 600;
 
@@ -126,6 +129,10 @@ main,
 }
 
 #mobileNav {
+    display: none;
+}
+
+#menuClose {
     display: none;
 }
 
@@ -165,7 +172,7 @@ hr {
 }
 
 #footerNav {
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap);
     font-weight: 600;
 }
 
@@ -174,11 +181,12 @@ hr {
 }
 
 footer hr {
-    margin: 1rem 0;
+    margin: var(--gap) 0;
 }
 
 #logoWrapFooter {
     float: right;
+    margin-left: .5rem;
 }
 
 #logoCI {
@@ -202,7 +210,7 @@ main header {
 }
 
 h1 {
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap);
     font-size: 3rem;
     font-weight: 600;
 }
@@ -229,8 +237,8 @@ a {
 
 #form,
 #savedResults li {
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin-bottom: var(--gap);
+    padding: var(--gap);
     background: white;
     border-radius: .3rem;
 }
@@ -249,13 +257,13 @@ a {
 #form fieldset {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-row-gap: 1rem;
+    grid-row-gap: var(--gap);
     grid-column-gap: .5rem;
     justify-content: center;
 }
 
 #formInput {
-    padding: 1rem 0;
+    padding: var(--gap) 0;
     padding-left: .5rem;
     grid-template-rows: repeat(6, 2.1rem);
 }
@@ -298,7 +306,7 @@ input.input {
     border: .1rem solid #b8c0c8;
     border-radius: .2rem;
     overflow: hidden;
-    height: 1rem;
+    height: var(--gap);
 }
 
 input[type="radio"] {
@@ -339,7 +347,7 @@ input[type="radio"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 1rem;
+    grid-row-gap: var(--gap);
     align-content: center;
     justify-content: center;
 }
@@ -378,7 +386,7 @@ input[type="radio"] {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-column-gap: .5rem;
-    grid-row-gap: 1rem;
+    grid-row-gap: var(--gap);
 }
 
 #formDepositMin,
@@ -394,7 +402,7 @@ input[type="radio"] {
 }
 
 #formResult {
-    padding: 1rem;
+    padding: var(--gap);
     background-color: #f5eee0;
     border-radius: .2rem;
     grid-template-rows: repeat(5, 2.1rem);
@@ -417,10 +425,7 @@ input[type="radio"] {
 
 #saveResult {
     width: 12rem;
-    height: 100%;
-
     color: #2a2f33;
-
     font-weight: 400;
     background: rgb(255, 188, 51);
     background: linear-gradient(0deg, #ffbc33 0%, #ffcc66 100%);
@@ -439,7 +444,7 @@ input[type="radio"] {
 #savedResults li {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
+    gap: var(--gap);
     padding-left: 1.5rem;
     position: relative;
     align-content: center;
@@ -456,8 +461,8 @@ input[type="radio"] {
 }
 
 #savedResults .label {
-    line-height: 1rem;
-    margin-top: 1rem;
+    line-height: var(--gap);
+    margin-top: var(--gap);
 }
 
 #savedResults .label:first-child {
@@ -477,8 +482,8 @@ input[type="radio"] {
 
 #savedResults .delete.button {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: var(--gap);
+    right: var(--gap);
 }
 
 
