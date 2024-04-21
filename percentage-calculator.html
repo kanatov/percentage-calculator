@@ -18,24 +18,29 @@
 
 <body>
 	<header id="topbar">
-		<div id="mobileSidebar">
-			<div id="mobileNavButton"><a href="#" id="mobileNavButton"><img id="menuClose" src="./img/close.svg" alt="menu" /><img id="menuHamburger" src="./img/menu.svg" alt="menu" /></a></div>
-			<div id="mobileNav">
-				<li class="selected"><span>Calculator</span></li>
-				<li><a href="#">Plans</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">About</a></li>
-			</div>
-		</div>
 		<div id="headerNavWrap">
 			<div id="logoWrap"><a href="#"><img id="logo" src="./img/logo.svg" alt="Cumulus logo" /></a>
 			</div>
-			<ul id="headerNav">
+			<ul id="headerNav" class="menu-nav">
 				<li class="selected"><span>Calculator</span></li>
 				<li><a href="#">Plans</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">About</a></li>
 			</ul>
+		</div>
+		<div id="mobileNavWrap">
+			<input id="sidebarMenuToggle" type="checkbox" autocomplete="off">
+			<label id="sidebarOverlay" for="sidebarMenuToggle" class="button"></label>
+			<ul id="mobileNav" class="menu-nav">
+				<li class="selected"><span>Calculator</span></li>
+				<li><a href="#">Plans</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+			<label id="sidebarMenuButton" for="sidebarMenuToggle" class="button">
+				<img id="menuClose" src="./img/close.svg" alt="menu" />
+				<img id="menuHamburger" src="./img/menu.svg" alt="menu" />
+			</label>
 		</div>
 	</header>
 	<main>

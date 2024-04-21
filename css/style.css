@@ -3,6 +3,10 @@
 */
 
 
+:root {
+    --gap: .8rem;
+}
+
 html,
 body {
     height: 100%;
@@ -20,7 +24,6 @@ p {
     padding: 0;
     margin: 0;
     border: none;
-    --gap: .8rem;
 }
 
 ul {
@@ -59,9 +62,6 @@ main,
     Topbar
 */
 
-#mobileSidebar {
-    display: none;
-}
 
 #topbar {
     padding: 1rem;
@@ -70,7 +70,6 @@ main,
     align-content: center;
     justify-content: left;
     position: fixed;
-    z-index: 1;
     width: 100%;
     background: white;
     box-shadow: 0 .1rem .25rem rgba(42, 47, 51, .2), 0 .5rem .5rem rgba(42, 47, 51, .1);
@@ -102,37 +101,93 @@ main,
 }
 
 #headerNav {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    flex: 1 1 auto;
+}
+
+.menu-nav {
+    display: flex;
     gap: .5rem;
 }
 
-#headerNav li a,
-#headerNav li span {
+.menu-nav li a,
+.menu-nav li span {
     padding: .6rem var(--gap);
     border-radius: 2rem;
     font-weight: 600;
 
 }
 
-#headerNav li a:hover {
+.menu-nav li a:hover {
     background-color: #ebf0f4;
 }
 
 
-#topbar .selected span {
+.selected span {
     background-color: #d7e0e6;
     cursor: default;
 
 }
 
-#mobileNav {
+#mobileNav,
+#mobileNavWrap,
+#sidebarOverlay {
+    display: none;
+    position: fixed;
+    /* z-index: 1; */
+    top: 0;
+    left: 0;
+}
+
+#sidebarMenuButton {
+    padding: 0 var(--gap);
+    line-height: 3.5;
+    position: absolute;
+}
+
+#sidebarMenuToggle {
     display: none;
 }
 
+
+#sidebarMenuToggle:checked~#sidebarMenuButton #menuClose {
+    display: inline;
+}
+
+#sidebarMenuToggle:checked~#sidebarMenuButton #menuHamburger {
+    display: none;
+}
+
+#mobileNav {
+    background-color: white;
+    padding-top: 3rem;
+    height: 100vh;
+    width: 12rem;
+}
+
+#mobileNav li {
+    /* height: 4rem; */
+    padding: 1rem;
+}
+
+#mobileNavButton {
+    display: block;
+}
+
+
+#sidebarMenuToggle:checked~#mobileNav,
+#sidebarMenuToggle:checked~#sidebarOverlay {
+    display: block;
+}
+
 #menuClose {
+    display: none;
+}
+
+#sidebarOverlay {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(42, 47, 51, .6);
     display: none;
 }
 
@@ -503,8 +558,4 @@ input[type="radio"] {
 .delete:hover {
     background-color: #FAF6F6;
     color: #8F3D3D;
-}
-
-#templates {
-    display: none;
 }

@@ -13,6 +13,11 @@ main {
     box-sizing: border-box;
 }
 
+#sidebarMenuButton {
+    line-height: 4;
+}
+
+
 #footerWrap {
     width: 100%;
 }
