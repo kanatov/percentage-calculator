@@ -43,24 +43,6 @@ main {
     display: none;
 }
 
-#mobileNavButton {
-    width: 0;
-    line-height: 0;
-}
-
-#mobileNavButton img {
-    width: 1.5rem;
-    height: 1.5rem;
-    vertical-align: middle;
-}
-
-#mobileNavButton img {
-    filter: brightness(0) invert(19%) sepia(100%) hue-rotate(140deg) saturate(20%);
-}
-
-#mobileNavButton a:hover img {
-    filter: brightness(0) invert(35%) sepia(100%) hue-rotate(140deg) saturate(20%);
-}
 
 
 h1 {

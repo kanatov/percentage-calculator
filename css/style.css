@@ -64,15 +64,16 @@ main,
 
 
 #topbar {
+    position: fixed;
+    display: flex;
+    width: 100%;
     padding: 1rem;
     box-sizing: border-box;
-    display: flex;
     align-content: center;
     justify-content: left;
-    position: fixed;
-    width: 100%;
     background: white;
     box-shadow: 0 .1rem .25rem rgba(42, 47, 51, .2), 0 .5rem .5rem rgba(42, 47, 51, .1);
+    z-index: 1;
 }
 
 #logoWrap {
@@ -98,6 +99,7 @@ main,
 #headerNavWrap {
     display: flex;
     align-content: center;
+    height: 100%;
 }
 
 #headerNav {
@@ -134,15 +136,30 @@ main,
 #sidebarOverlay {
     display: none;
     position: fixed;
-    /* z-index: 1; */
     top: 0;
     left: 0;
 }
 
+#mobileNavWrap {
+    height: 100%;
+}
+
 #sidebarMenuButton {
+    width: 0;
+    height: 2.7rem;
     padding: 0 var(--gap);
-    line-height: 3.5;
-    position: absolute;
+    display: block;
+    align-content: center;
+    line-height: 0;
+}
+
+#sidebarMenuButton img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+#sidebarMenuButton img {
+    filter: brightness(0) invert(19%) sepia(100%) hue-rotate(140deg) saturate(20%);
 }
 
 #sidebarMenuToggle {
@@ -163,17 +180,13 @@ main,
     padding-top: 3rem;
     height: 100vh;
     width: 12rem;
+    box-shadow: .1rem 0 .25rem rgba(42, 47, 51, .4), .5rem 0 .5rem rgba(42, 47, 51, .2);
 }
 
 #mobileNav li {
     /* height: 4rem; */
     padding: 1rem;
 }
-
-#mobileNavButton {
-    display: block;
-}
-
 
 #sidebarMenuToggle:checked~#mobileNav,
 #sidebarMenuToggle:checked~#sidebarOverlay {
@@ -348,10 +361,6 @@ a {
     grid-row: span 2;
 }
 
-.col-tripple {
-    grid-row: span 3;
-}
-
 label.label {
     font-weight: 600;
 }
@@ -461,16 +470,6 @@ input[type="radio"] {
     background-color: #f5eee0;
     border-radius: .2rem;
     grid-template-rows: repeat(5, 2.1rem);
-}
-
-#formResult a:hover {
-    background-color: #cad7e3;
-}
-
-#earnedInterest {
-    font-size: 1.6rem;
-    line-height: 1.5rem;
-    font-weight: 600;
 }
 
 #saveResultWrap {
